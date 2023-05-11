@@ -1,6 +1,8 @@
 <script setup>
 import { ref, reactive } from 'vue'
-import GridComponent from './GridComponent.vue';
+import GridComponent from '../components/GridComponent.vue';
+import TextboxComponent from '../components/TextboxComponent.vue';
+import common from '../common.js'
 const items = reactive([
   {
     "text": "Moje zapisy",
@@ -37,7 +39,8 @@ const items = reactive([
 </script>
 
 <template>
-  <GridComponent :display-data=items title="Siemanero"></GridComponent>
+  <GridComponent :display-data=items title="TestowyGrid" button-text="Wybierz" :button-type=common.buttonType.Accept></GridComponent>
+  <TextboxComponent label="Hasło" placeholder="Podaj hasło" tooltip="Hasło nie może być krótsze niż 6 znaków" :is-password=true></TextboxComponent>
 </template>
 
 <style scoped>

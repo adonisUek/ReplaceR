@@ -2,28 +2,28 @@
 import { reactive, ref } from 'vue'
 const items = reactive([
   {
+    "link": 'My',
     "text": "Moje zapisy",
-    "link": "link",
   },
   {
+    "link": 'CreateActivity',
     "text": "Utwórz zamianę",
-    "link": "link",
   },
   {
+    "link": 'My',
     "text": "Moje zamiany",
-    "link": "link",
   },
    {
+     "link": 'AvailableActivities',
     "text": "Dostępne zamiany",
-    "link": "link",
   },
    {
+     "link": 'EditUser',
     "text": "Edycja konta",
-    "link": "link",
   },
    {
+     "link": 'LogIn',
     "text": "Wyloguj",
-    "link": "link",
   }
 ]);
 </script>
@@ -33,7 +33,7 @@ const items = reactive([
 <div class="container-fluid justify-content-center">
   <ul class="navbar-nav nav-fill w-100">
     <li v-for="item in items" class="nav-item">
-      <a class="nav-link" href="#">{{item.text}}</a>
+      <router-link :to="{name: item.link}">{{item.text}}</router-link>
     </li>
   </ul>
 </div>

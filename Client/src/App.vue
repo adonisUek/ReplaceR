@@ -1,11 +1,12 @@
 <script setup>
 import MenuComponent from './components/MenuComponent.vue';
-import MainContent from './components/MainContent.vue';
+import LoginView from './views/LoginView.vue';
+import MainContent from './views/MainContent.vue';
 </script>
 
 <template>
   <MenuComponent/>
-  <MainContent/>
+  <router-view></router-view>
 </template>
 
 <style scoped>

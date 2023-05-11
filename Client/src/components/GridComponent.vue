@@ -4,18 +4,15 @@ let active = ref(false);
 let selectedItem;
 const props = defineProps({
   displayData: Array,
-  title: String
+  title: String,
+  buttonText: String,
+  buttonType: String
 });
 function ChangeSelection(value) {
-  this.active = !this.active;
-  if (this.active) {
     selectedItem = value;
-  }
-  else {
-    selectedItem = null;
-  }
   console.log(selectedItem);
 }
+
 </script>
 
 <template>
@@ -25,6 +22,7 @@ function ChangeSelection(value) {
       <thead>
         <tr>
           <th v-for="property in Object.keys(displayData[0])" scope="col">{{ property }}</th>
+          <th></th>
         </tr>
       </thead>
       <tbody>
@@ -32,6 +30,7 @@ function ChangeSelection(value) {
           backgroundColor: active && toRaw(item) === selectedItem ? 'yellow' : 'white',
         }">
           <td v-for="value in Object.values(item)">{{ value }} </td>
+          <td><button :class=buttonType @click="ChangeSelection(toRaw(item))">{{ buttonText }}</button></td>
         </tr>
       </tbody>
     </table>
@@ -60,11 +59,18 @@ h2 {
 table {
   table-layout: fixed;
 }
-table:hover {
-  cursor: pointer;
-}
+
 thead {
   background-color: dimgray;
   color: whitesmoke;
+}
+button
+{
+  opacity: 0.8;
+  color:whitesmoke;
+}
+button:hover {
+  cursor: pointer;
+  opacity: 1;
 }
 </style>
