@@ -14,7 +14,7 @@ import common from '../common.js'
       </div>
       <div class="button">
         <small class="form-text text-muted">Nie posiadasz jeszcze konta?</small>
-        <button :class=common.buttonType.Info>Załóż konto</button>
+        <button :class=common.buttonType.Info><router-link :to="{name: 'CreateUser'}">Załóż konto</router-link></button>
       </div>
       </div>  
     </div>
@@ -31,4 +31,11 @@ button {
   margin-top: 2%;
   padding: 10px;
 }
+a { 
+  text-decoration: none;
+  color: whitesmoke; 
+  }
+  a:hover{
+    color: white;
+  }
 </style>
