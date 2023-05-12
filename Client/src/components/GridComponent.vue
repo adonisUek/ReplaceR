@@ -26,9 +26,7 @@ function ChangeSelection(value) {
         </tr>
       </thead>
       <tbody>
-        <tr v-for="item in displayData" @click="ChangeSelection(toRaw(item))" :style="{
-          backgroundColor: active && toRaw(item) === selectedItem ? 'yellow' : 'white',
-        }">
+        <tr v-for="item in displayData" @click="ChangeSelection(toRaw(item))">
           <td v-for="value in Object.values(item)">{{ value }} </td>
           <td><button :class=buttonType @click="ChangeSelection(toRaw(item))">{{ buttonText }}</button></td>
         </tr>

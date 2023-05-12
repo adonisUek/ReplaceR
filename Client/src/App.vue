@@ -1,12 +1,11 @@
 <script setup>
 import MenuComponent from './components/MenuComponent.vue';
-import LoginView from './views/LoginView.vue';
-import MainContent from './views/MainContent.vue';
+import common from './common';
 </script>
 
 <template>
-  <MenuComponent/>
-  <router-view></router-view>
+  <MenuComponent :visible=common.menuVisible></MenuComponent>
+  <router-view/>
 </template>
 
 <style scoped>

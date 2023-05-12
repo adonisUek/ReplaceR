@@ -1,5 +1,8 @@
 <script setup>
 import { reactive, ref } from 'vue'
+const props = defineProps({
+  visible: Boolean
+});
 const items = reactive([
   {
     "link": 'My',
@@ -13,37 +16,39 @@ const items = reactive([
     "link": 'My',
     "text": "Moje zamiany",
   },
-   {
-     "link": 'AvailableActivities',
+  {
+    "link": 'AvailableActivities',
     "text": "Dostępne zajęcia",
   },
-   {
-     "link": 'EditUser',
+  {
+    "link": 'EditUser',
     "text": "Edycja konta",
   },
-   {
-     "link": 'LogIn',
+  {
+    "link": 'LogIn',
     "text": "Wyloguj",
   }
 ]);
 </script>
 <template>
+  <div :style="{
+          display: props.visible ? 'block' : 'none',
+        }">
+        
   <nav class="navbar navbar-expand-md bg-light">
-
-<div class="container-fluid justify-content-center">
-  <ul class="navbar-nav nav-fill w-100">
-    <li v-for="item in items" class="nav-item">
-      <router-link :to="{name: item.link}">{{item.text}}</router-link>
-    </li>
-  </ul>
+    <div class="container-fluid justify-content-center">
+      <ul class="navbar-nav nav-fill w-100">
+        <li v-for="item in items" class="nav-item">
+          <router-link :to="{ name: item.link }">{{ item.text }}</router-link>
+        </li>
+      </ul>
+    </div>
+  </nav>
 </div>
-
-</nav>
 </template>
 
 <style scoped>
-.container-fluid
-{
+.container-fluid {
   color: white;
 }
 
@@ -55,8 +60,8 @@ ul li {
   border-right: 1px solid lightgray;
 }
 
- a { 
+a {
   text-decoration: none;
-  color: black; 
-  }
+  color: black;
+}
 </style>

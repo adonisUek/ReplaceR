@@ -3,6 +3,7 @@ import { ref, reactive } from 'vue'
 import GridComponent from '../components/GridComponent.vue';
 import TextboxComponent from '../components/TextboxComponent.vue';
 import common from '../common.js'
+common.menuVisible = true;
 const items = reactive([
   {
     "text": "Moje zapisy",

@@ -1,6 +1,7 @@
 <script setup>
 import TextboxComponent from '../components/TextboxComponent.vue';
 import common from '../common.js'
+common.menuVisible = false;
 //todo: przy wejściu na ekran logowania następuje czyszczenie local storage
 </script>
 

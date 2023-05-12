@@ -5,5 +5,6 @@ export default reactive({
         Accept:   "btn btn-success",
         Delete:  "btn btn-danger",
         Info:  "btn btn-primary"
-    })
+    }),
+    menuVisible: true
 });
