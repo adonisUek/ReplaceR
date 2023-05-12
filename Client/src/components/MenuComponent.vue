@@ -7,7 +7,7 @@ const items = reactive([
   },
   {
     "link": 'CreateActivity',
-    "text": "Utwórz zamianę",
+    "text": "Utwórz zajęcia",
   },
   {
     "link": 'My',
@@ -15,7 +15,7 @@ const items = reactive([
   },
    {
      "link": 'AvailableActivities',
-    "text": "Dostępne zamiany",
+    "text": "Dostępne zajęcia",
   },
    {
      "link": 'EditUser',
@@ -47,16 +47,16 @@ const items = reactive([
   color: white;
 }
 
-ul li:hover
-{
-  cursor: pointer;
-}
-
 ul {
-  border-left: 1px solid black;
+  border-left: 1px solid lightgray;
 }
 
 ul li {
-  border-right: 1px solid black;
+  border-right: 1px solid lightgray;
 }
+
+ a { 
+  text-decoration: none;
+  color: black; 
+  }
 </style>
