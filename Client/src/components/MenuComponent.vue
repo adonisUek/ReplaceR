@@ -31,10 +31,7 @@ const items = reactive([
 ]);
 </script>
 <template>
-  <div :style="{
-          display: props.visible ? 'block' : 'none',
-        }">
-        
+  <div v-show = "props.visible">
   <nav class="navbar navbar-expand-md bg-light">
     <div class="container-fluid justify-content-center">
       <ul class="navbar-nav nav-fill w-100">

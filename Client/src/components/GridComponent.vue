@@ -1,6 +1,5 @@
 <script setup>
-import { toRaw, ref } from 'vue';
-let active = ref(false);
+import { toRaw } from 'vue';
 let selectedItem;
 const props = defineProps({
   displayDataSource: Array,
@@ -8,9 +7,11 @@ const props = defineProps({
   buttonText: String,
   buttonType: String,
 });
+const emit = defineEmits(['buttonClicked']);
+
 function ChangeSelection(value) {
     selectedItem = value;
-  console.log(selectedItem);
+    emit('buttonClicked', selectedItem);
 }
 
 </script>
