@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "D:\\EDUCATOR\\EducatorApp\\Educator\\Educator.csproj": {}
+    "D:\\EDUCATOR\\EducatorAPP\\API\\Educator\\Educator.csproj": {}
   },
   "projects": {
-    "D:\\EDUCATOR\\EducatorApp\\Educator\\Educator.csproj": {
+    "D:\\EDUCATOR\\EducatorAPP\\API\\Educator\\Educator.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\EDUCATOR\\EducatorApp\\Educator\\Educator.csproj",
+        "projectUniqueName": "D:\\EDUCATOR\\EducatorAPP\\API\\Educator\\Educator.csproj",
         "projectName": "Educator",
-        "projectPath": "D:\\EDUCATOR\\EducatorApp\\Educator\\Educator.csproj",
+        "projectPath": "D:\\EDUCATOR\\EducatorAPP\\API\\Educator\\Educator.csproj",
         "packagesPath": "C:\\Users\\skocz\\.nuget\\packages\\",
-        "outputPath": "D:\\EDUCATOR\\EducatorApp\\Educator\\obj\\",
+        "outputPath": "D:\\EDUCATOR\\EducatorAPP\\API\\Educator\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\skocz\\AppData\\Roaming\\NuGet\\NuGet.Config",

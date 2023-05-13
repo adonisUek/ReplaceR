@@ -4,7 +4,6 @@ using Educator.Api.Logic.Parameters;
 using Educator.DbModels;
 using Educator.DTO;
 using Microsoft.EntityFrameworkCore;
-using System.Net;
 namespace Educator.Api.Logic
 {
 	public class UserLogic : IUserLogic
@@ -28,10 +27,8 @@ namespace Educator.Api.Logic
 					PhoneNumber = parameters.PhoneNumber,
 					MailAddress = parameters.MailAddress,
 					Address = parameters.Address,
-					RoleId = parameters.RoleId,
 					IsActive = true,
-					IsEmailVerificationAllowed = parameters.IsEmailVerificationAllowed,
-					IsSmsVerificationAllowed = parameters.IsSmsVerificationAllowed
+					IsEmailNotificationsAllowed = parameters.IsEmailNotificationsAllowed,
 				};
 
 				_dbContext.Users.Add(user);
@@ -85,7 +82,6 @@ namespace Educator.Api.Logic
 			try
 			{
 				var users = await (from user in _dbContext.Users
-								   join role in _dbContext.Roles on user.RoleId equals role.Id
 								   where user.IsActive == true
 								   select new UserDto()
 								   {
@@ -96,9 +92,7 @@ namespace Educator.Api.Logic
 									   PhoneNumber = user.PhoneNumber,
 									   MailAddress = user.MailAddress,
 									   Address = user.Address,
-									   RoleName = role.Name,
-									   IsEmailVerificationAllowed = user.IsEmailVerificationAllowed,
-									   IsSmsVerificationAllowed = user.IsSmsVerificationAllowed
+									   IsEmailNotificationsAllowed = user.IsEmailNotificationsAllowed,
 								   }).ToListAsync();
 				return users;
 			}
@@ -128,8 +122,7 @@ namespace Educator.Api.Logic
 					userToEdit.LastName = parameters.MailAddress;
 				if (parameters.PhoneNumber != null)
 					userToEdit.PhoneNumber = parameters.PhoneNumber;
-				userToEdit.IsEmailVerificationAllowed = parameters.IsEmailVerificationAllowed;
-				userToEdit.IsSmsVerificationAllowed = parameters.IsSmsVerificationAllowed;
+				userToEdit.IsEmailNotificationsAllowed = parameters.IsEmailNotificationsAllowed;
 
 				await _dbContext.SaveChangesAsync();
 				return userToEdit;

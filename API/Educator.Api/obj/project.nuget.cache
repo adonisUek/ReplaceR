@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "9fHrJX2MwqGmKWTPOeS9PTOa00BnYSwqSpUQols3PRWQHiskr8FYO/LMSJtX7DMYxO0os6woVFmx9+Ph/IUmlg==",
+  "dgSpecHash": "blskg+31trEXHuPiLC5qEhXdslPBLlLvOsoQjq6yDnTDM57p6qsA/HviTe2jmUESCyv5k51iYrO5LCJ7ycO11w==",
   "success": true,
-  "projectFilePath": "D:\\EDUCATOR\\EducatorApp\\Educator.Api\\Educator.Api.csproj",
+  "projectFilePath": "D:\\EDUCATOR\\EducatorAPP\\API\\Educator.Api\\Educator.Api.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\skocz\\.nuget\\packages\\azure.core\\1.24.0\\azure.core.1.24.0.nupkg.sha512",
     "C:\\Users\\skocz\\.nuget\\packages\\azure.identity\\1.6.0\\azure.identity.1.6.0.nupkg.sha512",

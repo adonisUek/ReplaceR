@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "JQZ4U2sfXrQECQNaCQYNlNjBR6OhvkUQn7LA2oQDZ9OFoFcwRFQAuEtOYxeoZt+kRdpEL9fs0uPTghuiL3jIMQ==",
+  "dgSpecHash": "Yy8vjbWJAlW6JYBVl1LwV7n/vwOUSXsDPy9slowdsnYAVUtv+tfvP4ed9BARGaXWDT67Bcin2ZAIfZpc0+ijBQ==",
   "success": true,
-  "projectFilePath": "D:\\EDUCATOR\\EducatorApp\\Educator\\Educator.csproj",
+  "projectFilePath": "D:\\EDUCATOR\\EducatorAPP\\API\\Educator\\Educator.csproj",
   "expectedPackageFiles": [],
   "logs": []
 }

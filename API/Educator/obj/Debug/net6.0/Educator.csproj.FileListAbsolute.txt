@@ -10,3 +10,15 @@ D:\EDUCATOR\EducatorApp\Educator\obj\Debug\net6.0\Educator.dll
 D:\EDUCATOR\EducatorApp\Educator\obj\Debug\net6.0\refint\Educator.dll
 D:\EDUCATOR\EducatorApp\Educator\obj\Debug\net6.0\Educator.pdb
 D:\EDUCATOR\EducatorApp\Educator\obj\Debug\net6.0\ref\Educator.dll
+D:\EDUCATOR\EducatorAPP\API\Educator\bin\Debug\net6.0\Educator.deps.json
+D:\EDUCATOR\EducatorAPP\API\Educator\bin\Debug\net6.0\Educator.dll
+D:\EDUCATOR\EducatorAPP\API\Educator\bin\Debug\net6.0\Educator.pdb
+D:\EDUCATOR\EducatorAPP\API\Educator\obj\Debug\net6.0\Educator.csproj.AssemblyReference.cache
+D:\EDUCATOR\EducatorAPP\API\Educator\obj\Debug\net6.0\Educator.GeneratedMSBuildEditorConfig.editorconfig
+D:\EDUCATOR\EducatorAPP\API\Educator\obj\Debug\net6.0\Educator.AssemblyInfoInputs.cache
+D:\EDUCATOR\EducatorAPP\API\Educator\obj\Debug\net6.0\Educator.AssemblyInfo.cs
+D:\EDUCATOR\EducatorAPP\API\Educator\obj\Debug\net6.0\Educator.csproj.CoreCompileInputs.cache
+D:\EDUCATOR\EducatorAPP\API\Educator\obj\Debug\net6.0\Educator.dll
+D:\EDUCATOR\EducatorAPP\API\Educator\obj\Debug\net6.0\refint\Educator.dll
+D:\EDUCATOR\EducatorAPP\API\Educator\obj\Debug\net6.0\Educator.pdb
+D:\EDUCATOR\EducatorAPP\API\Educator\obj\Debug\net6.0\ref\Educator.dll

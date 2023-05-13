@@ -13,9 +13,7 @@ builder.Services.AddSwaggerGen();
 builder.Services.AddDbContext<EducatorDbContext>();
 
 builder.Services.AddScoped<IUserLogic, UserLogic>();
-builder.Services.AddScoped<IReplacementLogic, ReplacementLogic>();
-builder.Services.AddScoped<IEnrollmentLogic, EnrollmentLogic>();
-builder.Services.AddScoped<ISubjectLogic, SubjectLogic>();
+builder.Services.AddScoped<IActivityLogic, ActivityLogic>();
 
 var app = builder.Build();
 

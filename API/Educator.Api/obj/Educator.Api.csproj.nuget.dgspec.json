@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "D:\\EDUCATOR\\EducatorApp\\Educator.Api\\Educator.Api.csproj": {}
+    "D:\\EDUCATOR\\EducatorAPP\\API\\Educator.Api\\Educator.Api.csproj": {}
   },
   "projects": {
-    "D:\\EDUCATOR\\EducatorApp\\Educator.Api\\Educator.Api.csproj": {
+    "D:\\EDUCATOR\\EducatorAPP\\API\\Educator.Api\\Educator.Api.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\EDUCATOR\\EducatorApp\\Educator.Api\\Educator.Api.csproj",
+        "projectUniqueName": "D:\\EDUCATOR\\EducatorAPP\\API\\Educator.Api\\Educator.Api.csproj",
         "projectName": "Educator.Api",
-        "projectPath": "D:\\EDUCATOR\\EducatorApp\\Educator.Api\\Educator.Api.csproj",
+        "projectPath": "D:\\EDUCATOR\\EducatorAPP\\API\\Educator.Api\\Educator.Api.csproj",
         "packagesPath": "C:\\Users\\skocz\\.nuget\\packages\\",
-        "outputPath": "D:\\EDUCATOR\\EducatorApp\\Educator.Api\\obj\\",
+        "outputPath": "D:\\EDUCATOR\\EducatorAPP\\API\\Educator.Api\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\skocz\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -28,8 +28,8 @@
           "net6.0": {
             "targetAlias": "net6.0",
             "projectReferences": {
-              "D:\\EDUCATOR\\EducatorApp\\Educator\\Educator.csproj": {
-                "projectPath": "D:\\EDUCATOR\\EducatorApp\\Educator\\Educator.csproj"
+              "D:\\EDUCATOR\\EducatorAPP\\API\\Educator\\Educator.csproj": {
+                "projectPath": "D:\\EDUCATOR\\EducatorAPP\\API\\Educator\\Educator.csproj"
               }
             }
           }
@@ -100,14 +100,14 @@
         }
       }
     },
-    "D:\\EDUCATOR\\EducatorApp\\Educator\\Educator.csproj": {
+    "D:\\EDUCATOR\\EducatorAPP\\API\\Educator\\Educator.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\EDUCATOR\\EducatorApp\\Educator\\Educator.csproj",
+        "projectUniqueName": "D:\\EDUCATOR\\EducatorAPP\\API\\Educator\\Educator.csproj",
         "projectName": "Educator",
-        "projectPath": "D:\\EDUCATOR\\EducatorApp\\Educator\\Educator.csproj",
+        "projectPath": "D:\\EDUCATOR\\EducatorAPP\\API\\Educator\\Educator.csproj",
         "packagesPath": "C:\\Users\\skocz\\.nuget\\packages\\",
-        "outputPath": "D:\\EDUCATOR\\EducatorApp\\Educator\\obj\\",
+        "outputPath": "D:\\EDUCATOR\\EducatorAPP\\API\\Educator\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\skocz\\AppData\\Roaming\\NuGet\\NuGet.Config",
