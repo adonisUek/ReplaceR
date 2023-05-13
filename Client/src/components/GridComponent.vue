@@ -3,10 +3,10 @@ import { toRaw, ref } from 'vue';
 let active = ref(false);
 let selectedItem;
 const props = defineProps({
-  displayData: Array,
+  displayDataSource: Array,
   title: String,
   buttonText: String,
-  buttonType: String
+  buttonType: String,
 });
 function ChangeSelection(value) {
     selectedItem = value;
@@ -21,12 +21,12 @@ function ChangeSelection(value) {
     <table class="table">
       <thead>
         <tr>
-          <th v-for="property in Object.keys(displayData[0])" scope="col">{{ property }}</th>
+          <th v-for="property in Object.keys(displayDataSource[0])" scope="col">{{ property }}</th>
           <th></th>
         </tr>
       </thead>
       <tbody>
-        <tr v-for="item in displayData" @click="ChangeSelection(toRaw(item))">
+        <tr v-for="item in displayDataSource" @click="ChangeSelection(toRaw(item))">
           <td v-for="value in Object.values(item)">{{ value }} </td>
           <td><button :class=buttonType @click="ChangeSelection(toRaw(item))">{{ buttonText }}</button></td>
         </tr>
