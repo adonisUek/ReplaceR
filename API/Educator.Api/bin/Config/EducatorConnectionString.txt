@@ -1,1 +1,0 @@
-Server=DESKTOP-J6T2LI1\MSSQLSERVER1;Database=Educator;User Id=sa;Password=Educator123!;Trusted_Connection=True;TrustServerCertificate=True;

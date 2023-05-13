@@ -1,0 +1,12 @@
+{
+  "version": 2,
+  "dgSpecHash": "Vkcv5DzynoJZ5KThZ3xMnIolE0NmCLgjqMsVTPFbUS6UT5kA5m9Fr7k2z4R/9rhM5tsJUCxnRM0W83hgBJk+dA==",
+  "success": true,
+  "projectFilePath": "D:\\ReplaceR\\ReplaceR\\newApi\\Replacer\\Replacer\\Replacer.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\skocz\\.nuget\\packages\\microsoft.netcore.app.ref\\6.0.14\\microsoft.netcore.app.ref.6.0.14.nupkg.sha512",
+    "C:\\Users\\skocz\\.nuget\\packages\\microsoft.windowsdesktop.app.ref\\6.0.14\\microsoft.windowsdesktop.app.ref.6.0.14.nupkg.sha512",
+    "C:\\Users\\skocz\\.nuget\\packages\\microsoft.aspnetcore.app.ref\\6.0.14\\microsoft.aspnetcore.app.ref.6.0.14.nupkg.sha512"
+  ],
+  "logs": []
+}

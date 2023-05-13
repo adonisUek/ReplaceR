@@ -1,0 +1,12 @@
+D:\ReplaceR\ReplaceR\newApi\Replacer\Replacer\bin\Debug\net6.0\Replacer.deps.json
+D:\ReplaceR\ReplaceR\newApi\Replacer\Replacer\bin\Debug\net6.0\Replacer.dll
+D:\ReplaceR\ReplaceR\newApi\Replacer\Replacer\bin\Debug\net6.0\Replacer.pdb
+D:\ReplaceR\ReplaceR\newApi\Replacer\Replacer\obj\Debug\net6.0\Replacer.csproj.AssemblyReference.cache
+D:\ReplaceR\ReplaceR\newApi\Replacer\Replacer\obj\Debug\net6.0\Replacer.GeneratedMSBuildEditorConfig.editorconfig
+D:\ReplaceR\ReplaceR\newApi\Replacer\Replacer\obj\Debug\net6.0\Replacer.AssemblyInfoInputs.cache
+D:\ReplaceR\ReplaceR\newApi\Replacer\Replacer\obj\Debug\net6.0\Replacer.AssemblyInfo.cs
+D:\ReplaceR\ReplaceR\newApi\Replacer\Replacer\obj\Debug\net6.0\Replacer.csproj.CoreCompileInputs.cache
+D:\ReplaceR\ReplaceR\newApi\Replacer\Replacer\obj\Debug\net6.0\Replacer.dll
+D:\ReplaceR\ReplaceR\newApi\Replacer\Replacer\obj\Debug\net6.0\refint\Replacer.dll
+D:\ReplaceR\ReplaceR\newApi\Replacer\Replacer\obj\Debug\net6.0\Replacer.pdb
+D:\ReplaceR\ReplaceR\newApi\Replacer\Replacer\obj\Debug\net6.0\ref\Replacer.dll
