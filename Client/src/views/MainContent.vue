@@ -59,13 +59,9 @@ console.log(DisplayTest(Add, [1]));*/
 </script>
 
 <template>
-  <GridComponent :display-data-source=items title="TestowyGrid" button-text="Wybierz" :button-type=common.buttonType.Accept @button-clicked="e=>log(e)"> 
-  </GridComponent>
-
-
-  <TextboxComponent label="Hasło" placeholder="Podaj hasło" tooltip="Hasło nie może być krótsze niż 6 znaków"
-    :is-password=true @text-changed="e=>pwd=e"></TextboxComponent>
-    <button @click="log(item1)"></button>
+  <GridComponent :display-data-source=items title="TestowyGrid" button-text="Wybierz" :button-type=common.buttonType.Accept @button-clicked="e=>log(e)"></GridComponent>
+  <TextboxComponent label="Hasło" placeholder="Podaj hasło" tooltip="Hasło nie może być krótsze niż 6 znaków" :is-password=true @text-changed="e=>pwd=e"></TextboxComponent>
+  <button @click="log(item1)"></button>
 </template>
 
 <style scoped></style>

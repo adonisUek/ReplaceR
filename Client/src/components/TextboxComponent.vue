@@ -4,7 +4,6 @@ const props = defineProps({
   placeholder: String,
   tooltip: String,
   isPassword: Boolean,
-  modelValue: String
 });
 let inputText = "";
 const emit = defineEmits(['textChanged']);
