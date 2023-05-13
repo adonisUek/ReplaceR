@@ -43,6 +43,7 @@ const items = reactive([
 function log(text)
 {
   console.log(text);
+  location.reload();//do przeładowania strony jeszcze raz
 }
 /*function DisplayTest(callback, parameter) {
   callback.apply(this, parameter);
