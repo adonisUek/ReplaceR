@@ -26,7 +26,7 @@ namespace Replacer.Api.Logic
 				var activityWithId = await (from activity in _dbContext.Activities
 											join status in _dbContext.ActivityStatuses on activity.StatusId equals status.Id
 											join creator in _dbContext.Users on activity.CreatorId equals creator.Id
-											join newUser in _dbContext.Users on activity.NewUserId equals newUser.Id
+											join newUsers in _dbContext.Users on activity.NewUserId equals newUsers.Id into newUserNullable from newUser in newUserNullable.DefaultIfEmpty()
 											where activity.Id == id
 											select new ActivityDto()
 											{
@@ -44,7 +44,7 @@ namespace Replacer.Api.Logic
 													Address = creator.Address,
 													IsEmailNotificationsAllowed = creator.IsEmailNotificationsAllowed,
 												},
-												NewUser = new UserDto()
+												NewUser = newUser == null ? null : new UserDto()
 												{
 													Id = newUser.Id,
 													Login = newUser.Login,
@@ -75,8 +75,9 @@ namespace Replacer.Api.Logic
 				var activities = await (from activity in _dbContext.Activities
 										join status in _dbContext.ActivityStatuses on activity.StatusId equals status.Id
 										join creator in _dbContext.Users on activity.CreatorId equals creator.Id
-										join newUser in _dbContext.Users on activity.NewUserId equals newUser.Id
-										where  status.Name == "Created" && activity.CreatorId != userId
+										join newUsers in _dbContext.Users on activity.NewUserId equals newUsers.Id into newUserNullable
+										from newUser in newUserNullable.DefaultIfEmpty()
+										where status.Name == "Available" && activity.CreatorId != userId
 										select new ActivityDto()
 										{
 											Id = activity.Id,
@@ -93,7 +94,7 @@ namespace Replacer.Api.Logic
 												Address = creator.Address,
 												IsEmailNotificationsAllowed = creator.IsEmailNotificationsAllowed,
 											},
-											NewUser = new UserDto()
+											NewUser = newUser == null ? null : new UserDto()
 											{
 												Id = newUser.Id,
 												Login = newUser.Login,
@@ -123,7 +124,8 @@ namespace Replacer.Api.Logic
 			var activities = await (from activity in _dbContext.Activities
 									join status in _dbContext.ActivityStatuses on activity.StatusId equals status.Id
 									join creator in _dbContext.Users on activity.CreatorId equals creator.Id
-									join newUser in _dbContext.Users on activity.NewUserId equals newUser.Id
+									join newUsers in _dbContext.Users on activity.NewUserId equals newUsers.Id into newUserNullable
+									from newUser in newUserNullable.DefaultIfEmpty()
 									where activity.CreatorId == userId || activity.NewUserId == userId
 									select new ActivityDto()
 									{
@@ -141,7 +143,7 @@ namespace Replacer.Api.Logic
 											Address = creator.Address,
 											IsEmailNotificationsAllowed = creator.IsEmailNotificationsAllowed,
 										},
-										NewUser = new UserDto()
+										NewUser = newUser == null ? null : new UserDto()
 										{
 											Id = newUser.Id,
 											Login = newUser.Login,
@@ -166,7 +168,12 @@ namespace Replacer.Api.Logic
 			{
 				Activity activity = new()
 				{
-					//todo
+					Name = parameters.Name,
+					Date = parameters.Date,
+					CreatorId = parameters.CreatorId,
+					City = parameters.City,
+					Address = parameters.Address,
+					StatusId = 1
 				};
 				await _dbContext.Activities.AddAsync(activity);
 				await _dbContext.SaveChangesAsync();

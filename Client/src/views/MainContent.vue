@@ -6,6 +6,18 @@ import common from '../common.js'
 common.menuVisible = true;
 let pwd="";
 let item1 = undefined;
+const data = undefined;
+created() 
+{
+          axios.get(`https://localhost:7154/users`)
+              .then(response => {
+                  // JSON responses are automatically parsed.
+                  this.data = response.data
+              })
+              .catch(e => {
+                  this.errors.push(e)
+              });
+      };
 const items = reactive([
   {
     "text": "Moje zapisy",
@@ -59,7 +71,7 @@ console.log(DisplayTest(Add, [1]));*/
 </script>
 
 <template>
-  <GridComponent :display-data-source=items title="TestowyGrid" button-text="Wybierz" :button-type=common.buttonType.Accept @button-clicked="e=>log(e)"></GridComponent>
+  <GridComponent :display-data-source=data title="TestowyGrid" button-text="Wybierz" :button-type=common.buttonType.Accept @button-clicked="e=>log(e)"></GridComponent>
   <TextboxComponent label="Hasło" placeholder="Podaj hasło" tooltip="Hasło nie może być krótsze niż 6 znaków" :is-password=true @text-changed="e=>pwd=e"></TextboxComponent>
   <button @click="log(item1)"></button>
 </template>

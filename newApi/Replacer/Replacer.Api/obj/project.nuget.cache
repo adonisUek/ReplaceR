@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "jUIIIouPvUbshSLZRcEej0GYaw0KhuvpqqCGg9cTk7WmiM0fYpx+h3to5E9Tner56tomd4/eIRbnb3ABrpujlQ==",
+  "dgSpecHash": "dTZ0QrAbAUEeEaprXrDaMSeabGHKczaLm391TsL61WInk2cfEl0QGjvhCKYQTWwNYw4e32GxW/A75Wibm+NvUg==",
   "success": true,
   "projectFilePath": "D:\\ReplaceR\\ReplaceR\\newApi\\Replacer\\Replacer.Api\\Replacer.Api.csproj",
   "expectedPackageFiles": [
@@ -78,11 +78,7 @@
     "C:\\Users\\skocz\\.nuget\\packages\\system.text.json\\7.0.0\\system.text.json.7.0.0.nupkg.sha512",
     "C:\\Users\\skocz\\.nuget\\packages\\system.threading.tasks\\4.3.0\\system.threading.tasks.4.3.0.nupkg.sha512",
     "C:\\Users\\skocz\\.nuget\\packages\\system.threading.tasks.extensions\\4.5.4\\system.threading.tasks.extensions.4.5.4.nupkg.sha512",
-    "C:\\Users\\skocz\\.nuget\\packages\\system.windows.extensions\\5.0.0\\system.windows.extensions.5.0.0.nupkg.sha512",
-    "C:\\Users\\skocz\\.nuget\\packages\\microsoft.netcore.app.ref\\6.0.14\\microsoft.netcore.app.ref.6.0.14.nupkg.sha512",
-    "C:\\Users\\skocz\\.nuget\\packages\\microsoft.windowsdesktop.app.ref\\6.0.14\\microsoft.windowsdesktop.app.ref.6.0.14.nupkg.sha512",
-    "C:\\Users\\skocz\\.nuget\\packages\\microsoft.aspnetcore.app.ref\\6.0.14\\microsoft.aspnetcore.app.ref.6.0.14.nupkg.sha512",
-    "C:\\Users\\skocz\\.nuget\\packages\\microsoft.netcore.app.host.win-x64\\6.0.14\\microsoft.netcore.app.host.win-x64.6.0.14.nupkg.sha512"
+    "C:\\Users\\skocz\\.nuget\\packages\\system.windows.extensions\\5.0.0\\system.windows.extensions.5.0.0.nupkg.sha512"
   ],
   "logs": []
 }
