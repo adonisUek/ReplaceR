@@ -17,7 +17,6 @@ namespace Replacer.Api.Logic
 		{
 			_dbContext = replacerDbContext;
 		}
-		
 
 		public async Task<ActivityDto?> GetActivity(int id)
 		{
@@ -26,7 +25,8 @@ namespace Replacer.Api.Logic
 				var activityWithId = await (from activity in _dbContext.Activities
 											join status in _dbContext.ActivityStatuses on activity.StatusId equals status.Id
 											join creator in _dbContext.Users on activity.CreatorId equals creator.Id
-											join newUsers in _dbContext.Users on activity.NewUserId equals newUsers.Id into newUserNullable from newUser in newUserNullable.DefaultIfEmpty()
+											join newUsers in _dbContext.Users on activity.NewUserId equals newUsers.Id into newUserNullable 
+											from newUser in newUserNullable.DefaultIfEmpty()
 											where activity.Id == id
 											select new ActivityDto()
 											{

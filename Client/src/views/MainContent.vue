@@ -3,21 +3,21 @@ import { ref, reactive } from 'vue'
 import GridComponent from '../components/GridComponent.vue';
 import TextboxComponent from '../components/TextboxComponent.vue';
 import common from '../common.js'
+import axios from 'axios';
 common.menuVisible = true;
-let pwd="";
+let pwd = "";
 let item1 = undefined;
-const data = undefined;
-created() 
-{
-          axios.get(`https://localhost:7154/users`)
-              .then(response => {
-                  // JSON responses are automatically parsed.
-                  this.data = response.data
-              })
-              .catch(e => {
-                  this.errors.push(e)
-              });
-      };
+const data1 = undefined;
+/*axios.get(`http://localhost:5141/users`)
+  .then(response => {
+    // JSON responses are automatically parsed.
+    data1 = response.data
+  })
+  .catch(e => {
+    this.errors.push(e)
+  });
+  */
+console.log(data1);
 const items = reactive([
   {
     "text": "Moje zapisy",
@@ -52,8 +52,7 @@ const items = reactive([
   }
 ]);
 
-function log(text)
-{
+function log(text) {
   console.log(text);
   location.reload();//do przeładowania strony jeszcze raz
 }
@@ -71,8 +70,10 @@ console.log(DisplayTest(Add, [1]));*/
 </script>
 
 <template>
-  <GridComponent :display-data-source=data title="TestowyGrid" button-text="Wybierz" :button-type=common.buttonType.Accept @button-clicked="e=>log(e)"></GridComponent>
-  <TextboxComponent label="Hasło" placeholder="Podaj hasło" tooltip="Hasło nie może być krótsze niż 6 znaków" :is-password=true @text-changed="e=>pwd=e"></TextboxComponent>
+  <GridComponent :display-data-source=items title="TestowyGrid" button-text="Wybierz" :button-type=common.buttonType.Accept
+    @button-clicked="e => log(e)"></GridComponent>
+  <TextboxComponent label="Hasło" placeholder="Podaj hasło" tooltip="Hasło nie może być krótsze niż 6 znaków"
+    :is-password=true @text-changed="e => pwd = e"></TextboxComponent>
   <button @click="log(item1)"></button>
 </template>
 

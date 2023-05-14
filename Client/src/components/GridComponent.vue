@@ -19,7 +19,7 @@ function ChangeSelection(value) {
 <template>
   <div id="tableDiv">
     <h2>{{ title }} </h2>
-    <table class="table">
+    <table class="table" v-if = props.displayDataSource>
       <thead>
         <tr>
           <th v-for="property in Object.keys(displayDataSource[0])" scope="col">{{ property }}</th>
@@ -33,6 +33,7 @@ function ChangeSelection(value) {
         </tr>
       </tbody>
     </table>
+    <h3 v-else>Wystąpił błąd podczas pobierania danych</h3>
   </div>
 </template>
 
