@@ -76,11 +76,12 @@ namespace Replacer.Api.Logic
 			}
 		}
 
-		public async Task<IEnumerable<UserDto>?> GetUsers()
+		public async Task<UserDto?> GetUser(int id)
 		{
 			try
 			{
-				var users = await (from user in _dbContext.Users
+				var user1 = await (from user in _dbContext.Users
+								   where user.Id == id
 								   select new UserDto()
 								   {
 									   Id = user.Id,
@@ -91,8 +92,8 @@ namespace Replacer.Api.Logic
 									   MailAddress = user.MailAddress,
 									   Address = user.Address,
 									   IsEmailNotificationsAllowed = user.IsEmailNotificationsAllowed,
-								   }).ToListAsync();
-				return users;
+								   }).FirstOrDefaultAsync();
+				return user1;
 			}
 			catch (Exception)
 			{

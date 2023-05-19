@@ -1,56 +1,13 @@
 <script setup>
-import { ref, reactive } from 'vue'
+import { ref, reactive, onMounted, toRaw } from 'vue'
 import GridComponent from '../components/GridComponent.vue';
 import TextboxComponent from '../components/TextboxComponent.vue';
 import common from '../common.js'
 import axios from 'axios';
 common.menuVisible = true;
-let pwd = "";
-let item1 = undefined;
-const data1 = undefined;
-/*axios.get(`http://localhost:5141/users`)
-  .then(response => {
-    // JSON responses are automatically parsed.
-    data1 = response.data
-  })
-  .catch(e => {
-    this.errors.push(e)
-  });
-  */
-console.log(data1);
-const items = reactive([
-  {
-    "text": "Moje zapisy",
-    "link": "link",
-    "test": "test"
-  },
-  {
-    "text": "Utwórz zamianę",
-    "link": "link",
-    "test": "test"
-
-  },
-  {
-    "text": "Moje zamiany",
-    "link": "link",
-    "test": "test"
-  },
-  {
-    "text": "Dostępne zamiany",
-    "link": "link",
-    "test": "test"
-  },
-  {
-    "text": "Edycja konta",
-    "link": "link",
-    "i": "link",
-  },
-  {
-    "text": "Wyloguj",
-    "link": "link",
-    "test": "test"
-  }
-]);
+const users = ref(null);
+const userId = 1;
+const isScriptLoaded = ref(false);
 
 function log(text) {
   console.log(text);
@@ -66,12 +23,23 @@ function Add(one) {
 }
 console.log(DisplayTest(Add, [1]));*/
 //
+onMounted(async () => {
+  try {
+    const response = await axios.get(`http://localhost:5141/api/activity/my/${userId}`);
+    //const response = await axios.get(`http://localhost:5141/api/activity/my/${userId}`,{ params: {id: 1} });
+    users.value = response.data;
+  } catch (error) {
+    console.error(error);
+  }
+});
 
 </script>
 
 <template>
-  <GridComponent :display-data-source=items title="TestowyGrid" button-text="Wybierz" :button-type=common.buttonType.Accept
-    @button-clicked="e => log(e)"></GridComponent>
+  <p>{{ users }} </p>
+  <GridComponent v-if="users !== null"  :display-data-source=users title="TestowyGrid" button-text="Wybierz"
+    :button-type=common.buttonType.Accept @button-clicked="e => log(e)"></GridComponent>
+    <p v-else>Błąd podczas tworzenia tabeli</p>
   <TextboxComponent label="Hasło" placeholder="Podaj hasło" tooltip="Hasło nie może być krótsze niż 6 znaków"
     :is-password=true @text-changed="e => pwd = e"></TextboxComponent>
   <button @click="log(item1)"></button>

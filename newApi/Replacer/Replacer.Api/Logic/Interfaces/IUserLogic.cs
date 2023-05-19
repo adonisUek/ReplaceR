@@ -6,7 +6,7 @@ namespace Replacer.Api.Logic.Interfaces
 {
     public interface IUserLogic
     {
-        Task<IEnumerable<UserDto>?> GetUsers();
+        Task<UserDto?> GetUser(int id);
 		Task<UserAuthDto?> GetUser(string login);
 		Task<User?> CreateUser(CreateUserParameters parameters);
 		Task<User?> UpdateUser(int id, UpdateUserParameters parameters);

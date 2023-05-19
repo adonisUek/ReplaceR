@@ -9,11 +9,11 @@ const props = defineProps({
 });
 const emit = defineEmits(['buttonClicked']);
 
-function ChangeSelection(value) {
+async function ChangeSelection(value) {
     selectedItem = value;
     emit('buttonClicked', selectedItem);
 }
-
+console.log(props.displayDataSource);
 </script>
 
 <template>

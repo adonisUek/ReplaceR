@@ -30,13 +30,13 @@ namespace Replacer.Api.Controllers
 		}
 
 		[HttpGet]
-		public async Task<ActionResult<List<UserDto>>> GetUsers()
+		public async Task<ActionResult<UserDto>> GetUser(int id)
 		{
-			var users = await _logic.GetUsers();
-			if (users == null)
-				return NotFound("B³¹d podczas pobierania u¿ytkowników");
+			var user = await _logic.GetUser(id);
+			if (user == null)
+				return NotFound("B³¹d podczas pobierania u¿ytkownika");
 
-			return Ok(users);
+			return Ok(user);
 		}
 
 		[HttpPost]
