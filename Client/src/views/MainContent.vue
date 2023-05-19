@@ -4,6 +4,7 @@ import GridComponent from '../components/GridComponent.vue';
 import TextboxComponent from '../components/TextboxComponent.vue';
 import common from '../common.js'
 import axios from 'axios';
+import {GetMyActivities} from '../api'
 common.menuVisible = true;
 const users = ref(null);
 const userId = 1;
@@ -25,13 +26,15 @@ console.log(DisplayTest(Add, [1]));*/
 //
 onMounted(async () => {
   try {
-    const response = await axios.get(`http://localhost:5141/api/activity/my/${userId}`);
-    //const response = await axios.get(`http://localhost:5141/api/activity/my/${userId}`,{ params: {id: 1} });
+    const myActivities = GetMyActivities(userId);
+    const response = await axios.get(myActivities);
     users.value = response.data;
   } catch (error) {
     console.error(error);
   }
 });
+
+
 
 </script>
 

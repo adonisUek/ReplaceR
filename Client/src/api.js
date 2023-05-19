@@ -1,31 +1,50 @@
-import daneTestowe from "./daneTestowe";
-function GetActivities() {
-    return daneTestowe.activities;
+const baseUrl = "http://localhost:5141/api/"
+
+
+//activities
+
+export function GetActivities() {
+    return `${baseUrl}activity`
 }
 
-function GetMyActivities() {
-    return daneTestowe.activities;
+export function GetActivityById(id) {
+    return `${baseUrl}activity/${id}`
 }
 
-function CreateActivity(parameters) {
+export function GetMyActivities(id) {
+    return `${baseUrl}activity/my/${id}`
 }
 
-function UpdateActivity(parameters){
+export function CreateActivity() {
+    return `${baseUrl}activity`
 }
 
-function DeleteActivity(parameters){
+export function UpdateActivity() {
+    return `${baseUrl}activity`
 }
 
-function AuthenticateUser(){
+export function DeleteActivity(id) {
+    return `${baseUrl}activity/my/${id}`
 }
 
-function GetUser(){
-    return daneTestowe.activities[0].Creator;
+//users
+export function AuthenticateUser() {
+    return `${baseUrl}users/auth`
 }
 
-function CreateUser(){
+export function GetUser() {
+    return `${baseUrl}users`
 }
 
-function UpdateUser(){
+export function CreateUser() {
+    return `${baseUrl}users`
+}
+
+export function UpdateUser() {
+    return `${baseUrl}users`
+}
+
+export function DeleteUser(id) {
+    return `${baseUrl}users/${id}`
 }
 
