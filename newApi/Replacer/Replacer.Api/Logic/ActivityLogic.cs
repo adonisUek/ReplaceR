@@ -25,16 +25,16 @@ namespace Replacer.Api.Logic
 				var activityWithId = await (from activity in _dbContext.Activities
 											join status in _dbContext.ActivityStatuses on activity.StatusId equals status.Id
 											join creator in _dbContext.Users on activity.CreatorId equals creator.Id
-											join newUsers in _dbContext.Users on activity.NewUserId equals newUsers.Id into newUserNullable 
+											join newUsers in _dbContext.Users on activity.NewUserId equals newUsers.Id into newUserNullable
 											from newUser in newUserNullable.DefaultIfEmpty()
 											where activity.Id == id
 											select new ActivityDto()
 											{
 												Id = activity.Id,
-												Name=activity.Name,
-												Date=activity.Date,
+												Name = activity.Name,
+												Date = activity.Date,
 												Creator = new UserDto()
-												{ 
+												{
 													Id = creator.Id,
 													Login = creator.Login,
 													FirstName = creator.FirstName,
@@ -205,24 +205,60 @@ namespace Replacer.Api.Logic
 		{
 			//TODO
 			Activity? activity = await _dbContext.Activities.FindAsync(parameters.ActivityId);
-			var message = new MailMessage()
+			User? newUser = await _dbContext.Users.FindAsync(parameters.NewUserId);
+			User? oldUser = await _dbContext.Users.FindAsync(parameters.OldUserId);
+			if (activity == null)
+				throw new ApplicationException("Nie znaleziono aktywności o id" + parameters.ActivityId);
+			if (oldUser == null)
+				throw new ApplicationException("Nie znaleziono użytkownika (oldUserId) o id" + parameters.OldUserId);
+			if (newUser == null)
+				throw new ApplicationException("Nie znaleziono użytkownika (newUserId) o id" + parameters.NewUserId);
+
+			MailMessage message = new()
 			{
 				From = new MailAddress("empatyzacja@gmail.com", "REPLACER APP"),
-				Subject = "Poznaj nasze nowości",
-				Body = ""
+				Subject = "Zmiana statusu aktywności w aplikacji Replacer"
 			};
-			message.To.Add(new MailAddress(""));
-			byte[] reader = File.ReadAllBytes("");
-			MemoryStream stream = new MemoryStream(reader);
-			AlternateView av = AlternateView.CreateAlternateViewFromString(message.Body, null, MediaTypeNames.Text.Html);
-			LinkedResource headerImage = new(stream, MediaTypeNames.Image.Jpeg);
-			headerImage.ContentId = "newsletter";
-			headerImage.ContentType = new ContentType("image/jpg");
-			av.LinkedResources.Add(headerImage);
-			message.AlternateViews.Add(av);
-			ContentType mimeType = new ContentType("text/html");
-			AlternateView alternate = AlternateView.CreateAlternateViewFromString(message.Body, mimeType);
-			message.AlternateViews.Add(alternate);
+
+			if (!string.IsNullOrEmpty(oldUser?.MailAddress))
+				message.To.Add(new MailAddress(oldUser.MailAddress));
+			if (!string.IsNullOrEmpty(newUser?.MailAddress))
+				message.To.Add(new MailAddress(newUser.MailAddress));
+
+			activity.StatusId = parameters.NewStatusId;
+
+			//rezerwacja dostępnej aktywności
+			if (parameters.OldStatusId == 1 && parameters.NewStatusId == 2)
+			{
+				activity.NewUserId = parameters.NewUserId;
+				message.Body = $"Użytkownik {newUser?.FirstName} {newUser?.LastName} ({newUser?.Login}) zarezerwował aktywość: {activity?.Name}, " +
+					$"którą utworzył użytkownik {oldUser?.FirstName} {oldUser?.LastName} ({oldUser?.Login})" +
+					$"Aktywność odbędzie się {activity?.Date} w lokalizacji: {activity?.Address}, {activity?.City}";
+			}
+
+			//użytkownik który zarezerwował anuluje rezerwację
+			if (parameters.OldStatusId == 2 && parameters.NewStatusId == 1)
+			{
+				message.Body = $"Użytkownik {newUser?.FirstName} {newUser?.LastName} ({newUser?.Login}) anulował rezerwację aktywości: {activity?.Name}, " +
+					$"którą utworzył użytkownik {oldUser?.FirstName} {oldUser?.LastName} ({oldUser?.Login})" +
+					$"Szczegóły aktywności: data: {activity?.Date.ToString()}, lokalizacja: {activity?.Address}, {activity?.City}";
+			}
+
+			//twórca odwołuje już zarezerwowaną aktywność
+			if (parameters.OldStatusId == 2 && parameters.NewStatusId == 3)
+			{
+				message.Body = $"Użytkownik {oldUser?.FirstName} {oldUser?.LastName} ({oldUser?.Login}) odwołał aktywość: {activity?.Name}, " +
+					$"Szczegóły aktywności: data: {activity?.Date.ToString()}, lokalizacja: {activity?.Address}, {activity?.City}";
+			}
+
+			//twórca odwołuje aktywność która jest dostępna
+			if (parameters.OldStatusId == 1 && parameters.NewStatusId == 3)
+			{
+				throw new ApplicationException("Do odwoływania nie zarezerwowanych aktywności słuzy metoda delete activity, zaś przywracanie anulowanych aktywności nie jest obsługiwane");
+			}
+
+			await _dbContext.SaveChangesAsync();
+
 			SmtpClient smtp = new()
 			{
 				Host = "smtp.gmail.com",
@@ -233,7 +269,8 @@ namespace Replacer.Api.Logic
 			};
 			try
 			{
-				smtp.SendAsync(message, message.To.First());
+				foreach (MailAddress address in message.To.ToArray())
+					smtp.SendAsync(message, address);
 			}
 			catch (SmtpException ex)
 			{

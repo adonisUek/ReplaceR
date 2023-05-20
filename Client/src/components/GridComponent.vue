@@ -10,8 +10,8 @@ const props = defineProps({
 const emit = defineEmits(['buttonClicked']);
 
 async function ChangeSelection(value) {
-    selectedItem = value;
-    emit('buttonClicked', selectedItem);
+  selectedItem = value;
+  emit('buttonClicked', selectedItem);
 }
 console.log(props.displayDataSource);
 </script>
@@ -19,10 +19,11 @@ console.log(props.displayDataSource);
 <template>
   <div id="tableDiv">
     <h2>{{ title }} </h2>
-    <table class="table" v-if = props.displayDataSource>
+    <table class="table">
       <thead>
         <tr>
-          <th v-for="property in Object.keys(displayDataSource[0])" scope="col">{{ property }}</th>
+          <th v-if="props.displayDataSource && props.displayDataSource.length > 0" v-for="property in Object.keys(displayDataSource[0])" scope="col">{{ property }}</th>
+          <th v-else>BRAK DANYCH</th>
           <th></th>
         </tr>
       </thead>
@@ -33,7 +34,6 @@ console.log(props.displayDataSource);
         </tr>
       </tbody>
     </table>
-    <h3 v-else>Wystąpił błąd podczas pobierania danych</h3>
   </div>
 </template>
 
@@ -64,11 +64,12 @@ thead {
   background-color: dimgray;
   color: whitesmoke;
 }
-button
-{
+
+button {
   opacity: 0.8;
-  color:whitesmoke;
+  color: whitesmoke;
 }
+
 button:hover {
   cursor: pointer;
   opacity: 1;

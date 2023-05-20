@@ -2,9 +2,11 @@ const baseUrl = "http://localhost:5141/api/"
 
 
 //activities
-
-export function GetActivities() {
-    return `${baseUrl}activity`
+export function GetActivities(id) {
+    return { 
+        path: `${baseUrl}activity`,
+        params: { params: { userId: id } }
+    }
 }
 
 export function GetActivityById(id) {
@@ -12,7 +14,10 @@ export function GetActivityById(id) {
 }
 
 export function GetMyActivities(id) {
-    return `${baseUrl}activity/my/${id}`
+    return { 
+        path: `${baseUrl}activity/my/${id}`,
+        params: null
+    }
 }
 
 export function CreateActivity() {
