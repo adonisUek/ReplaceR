@@ -220,9 +220,9 @@ namespace Replacer.Api.Logic
 				Subject = "Zmiana statusu aktywności w aplikacji Replacer"
 			};
 
-			if (!string.IsNullOrEmpty(oldUser?.MailAddress))
+			if ((!string.IsNullOrEmpty(oldUser?.MailAddress)) && oldUser.IsEmailNotificationsAllowed)
 				message.To.Add(new MailAddress(oldUser.MailAddress));
-			if (!string.IsNullOrEmpty(newUser?.MailAddress))
+			if ((!string.IsNullOrEmpty(newUser?.MailAddress)) && newUser.IsEmailNotificationsAllowed)
 				message.To.Add(new MailAddress(newUser.MailAddress));
 
 			activity.StatusId = parameters.NewStatusId;

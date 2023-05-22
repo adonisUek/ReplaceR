@@ -21,7 +21,7 @@ namespace Replacer.Api.Controllers
 		{
 			var user = await _logic.GetUser(login);
 			if (user == null)
-				return NotFound("Nie istnieje aktywny u¿ytkownik o takim loginie");
+				return NotFound("Nie istnieje u¿ytkownik o tym loginie");
 
 			if (!BCrypt.Net.BCrypt.Verify(password, user.Password))
 				return BadRequest("Niepoprawne has³o");

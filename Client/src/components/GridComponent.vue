@@ -13,7 +13,6 @@ async function ChangeSelection(value) {
   selectedItem = value;
   emit('buttonClicked', selectedItem);
 }
-console.log(props.displayDataSource);
 </script>
 
 <template>
@@ -28,7 +27,7 @@ console.log(props.displayDataSource);
         </tr>
       </thead>
       <tbody>
-        <tr v-for="item in displayDataSource" @click="ChangeSelection(toRaw(item))">
+        <tr v-for="item in displayDataSource">
           <td v-for="value in Object.values(item)">{{ value }} </td>
           <td><button :class=buttonType @click="ChangeSelection(toRaw(item))">{{ buttonText }}</button></td>
         </tr>

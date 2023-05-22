@@ -92,4 +92,3 @@ export function DeleteUser(id) {
         params: null
     }
 }
-
