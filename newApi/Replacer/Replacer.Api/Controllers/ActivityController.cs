@@ -53,10 +53,10 @@ namespace Replacer.Api.Controllers
 			return Ok(result);
 		}
 
-		[HttpPut]
-		public async Task<ActionResult<IEnumerable<ActivityDto>>> UpdateActivity(UpdateActivityParameters parameters)
+		[HttpPut("{id}")]
+		public async Task<ActionResult<IEnumerable<ActivityDto>>> UpdateActivity(int id, UpdateActivityParameters parameters)
 		{
-			var result = await _logic.UpdateActivity(parameters);
+			var result = await _logic.UpdateActivity(id, parameters);
 			if (result is null)
 				return BadRequest($"Błąd podczas edycji aktywności");
 

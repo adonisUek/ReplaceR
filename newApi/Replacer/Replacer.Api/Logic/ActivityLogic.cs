@@ -201,14 +201,14 @@ namespace Replacer.Api.Logic
 			}
 		}
 
-		public async Task<Activity?> UpdateActivity(UpdateActivityParameters parameters)
+		public async Task<Activity?> UpdateActivity(int id, UpdateActivityParameters parameters)
 		{
 			//TODO
-			Activity? activity = await _dbContext.Activities.FindAsync(parameters.ActivityId);
+			Activity? activity = await _dbContext.Activities.FindAsync(id);
 			User? newUser = await _dbContext.Users.FindAsync(parameters.NewUserId);
 			User? oldUser = await _dbContext.Users.FindAsync(parameters.OldUserId);
 			if (activity == null)
-				throw new ApplicationException("Nie znaleziono aktywności o id" + parameters.ActivityId);
+				throw new ApplicationException("Nie znaleziono aktywności o id" + id);
 			if (oldUser == null)
 				throw new ApplicationException("Nie znaleziono użytkownika (oldUserId) o id" + parameters.OldUserId);
 			if (newUser == null)

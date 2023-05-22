@@ -10,7 +10,7 @@ namespace Replacer.Api.Logic.Interfaces
 		Task<IEnumerable<ActivityDto>?> GetMyActivities(int userId);
 		Task<ActivityDto?> GetActivity(int id);
 		Task<IEnumerable<Activity>?> CreateActivity(CreateActivityParameters parameters);
-		Task<Activity?> UpdateActivity(UpdateActivityParameters parameters);
+		Task<Activity?> UpdateActivity(int id, UpdateActivityParameters parameters);
 		Task<bool> DeleteActivity(int id);
     }
 }

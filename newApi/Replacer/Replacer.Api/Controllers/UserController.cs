@@ -29,7 +29,7 @@ namespace Replacer.Api.Controllers
 			return Ok(user);
 		}
 
-		[HttpGet]
+		[HttpGet("{id}")]
 		public async Task<ActionResult<UserDto>> GetUser(int id)
 		{
 			var user = await _logic.GetUser(id);
@@ -52,7 +52,7 @@ namespace Replacer.Api.Controllers
 			
 			return Ok(result);
 		}
-		[HttpPut]
+		[HttpPut("{id}")]
 		public async Task<ActionResult<IEnumerable<User>>> UpdateUser(int id, UpdateUserParameters parameters)
 		{
 			var result = await _logic.UpdateUser(id, parameters);

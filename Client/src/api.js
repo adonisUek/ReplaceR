@@ -1,55 +1,95 @@
 const baseUrl = "http://localhost:5141/api/"
 
+//ACTIVITIES
 
-//activities
+//get
 export function GetActivities(id) {
-    return { 
+    return {
         path: `${baseUrl}activity`,
         params: { params: { userId: id } }
     }
 }
 
+//get
 export function GetActivityById(id) {
-    return `${baseUrl}activity/${id}`
+    return {
+        path: `${baseUrl}activity/${id}`,
+        params: null
+    }
 }
 
+//get
 export function GetMyActivities(id) {
-    return { 
+    return {
         path: `${baseUrl}activity/my/${id}`,
         params: null
     }
 }
 
-export function CreateActivity() {
-    return `${baseUrl}activity`
+//post
+export function CreateActivity(name, date, creatorId, city, address) {
+    return {
+        path: `${baseUrl}activity`,
+        params: { params: {name:name, date:date, creatorId:creatorId, city:city, address:address} }
+    }
 }
 
-export function UpdateActivity() {
-    return `${baseUrl}activity`
+//put
+export function UpdateActivity(id, oldStatusId, newStatusId, oldUserId, newUserId) {
+    return {
+        path: `${baseUrl}activity/${id}`,
+        params: { params: {oldStatusId:oldStatusId, newStatusId:newStatusId, oldUserId:oldUserId, newUserId:newUserId} }
+    }
 }
 
+//delete
 export function DeleteActivity(id) {
-    return `${baseUrl}activity/my/${id}`
+    return {
+        path: `${baseUrl}activity/${id}`,
+        params: null
+    }
 }
 
-//users
-export function AuthenticateUser() {
-    return `${baseUrl}users/auth`
+//---------------------------------------------------//
+//USERS
+
+//get
+export function AuthenticateUser(login, password) {
+    return {
+        path: `${baseUrl}users/auth`,
+        params: { params: { login: login, password: password } }
+    }
 }
 
-export function GetUser() {
-    return `${baseUrl}users`
+//get
+export function GetUser(id) {
+    return {
+        path: `${baseUrl}users/${id}`,
+        params: null
+    }
 }
 
-export function CreateUser() {
-    return `${baseUrl}users`
+//post
+export function CreateUser(login, password, firstName, lastName, mailAddress, phoneNumber, address, isEmailNotificationsAllowed) {
+    return {
+        path: `${baseUrl}users`,
+        params: { params: {login:login, password:password, firstName:firstName, lastName:lastName, mailAddress:mailAddress, phoneNumber:phoneNumber, address:address, isEmailNotificationsAllowed:isEmailNotificationsAllowed} }
+    }
 }
 
-export function UpdateUser() {
-    return `${baseUrl}users`
+//put
+export function UpdateUser(id, password, firstName, lastName, mailAddress, phoneNumber, address, isEmailNotificationsAllowed) {
+    return {
+        path: `${baseUrl}users/${id}`,
+        params: { params: {password:password, firstName:firstName, lastName:lastName, mailAddress:mailAddress, phoneNumber:phoneNumber, address:address, isEmailNotificationsAllowed:isEmailNotificationsAllowed} }
+    }
 }
 
+//delete
 export function DeleteUser(id) {
-    return `${baseUrl}users/${id}`
+    return {
+        path: `${baseUrl}users/${id}`,
+        params: null
+    }
 }
 
