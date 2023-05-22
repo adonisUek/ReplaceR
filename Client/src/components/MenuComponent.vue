@@ -6,15 +6,11 @@ const props = defineProps({
 const items = reactive([
   {
     "link": 'My',
-    "text": "Moje zapisy",
+    "text": "Moje zajęcia",
   },
   {
     "link": 'CreateActivity',
     "text": "Utwórz zajęcia",
-  },
-  {
-    "link": 'My',
-    "text": "Moje zamiany",
   },
   {
     "link": 'AvailableActivities',

@@ -6,25 +6,32 @@ import common from '../common.js'
 import axios from 'axios';
 import { AuthenticateUser } from '../api';
 
-const apiResult = ref(null);
-const errorMessage = ref(null);
 common.menuVisible = false;
+const errorMessage = ref(null);
+const disabled = ref(true);
 let login = "";
 let password = "";
 const router = useRouter();
+
+function checkDisabled() {
+  console.log(login); console.log(password)
+  if (login === "" || password === "")
+    disabled.value = true;
+  else
+    disabled.value = false;
+}
 
 const LogIn = async () => {
   try {
     const auth = AuthenticateUser(login, password);
     const response = await axios.get(auth.path, auth.params);
     console.log(response);
-    router.push({name: 'Main'});
+    router.push({ name: 'Main' });
   } catch (error) {
     console.error(error);
     errorMessage.value = error.response.data
-    apiResult.value = 'error';
-    }
-  };
+  }
+};
 
 //todo: przy wejściu na ekran logowania następuje czyszczenie local storage
 </script>
@@ -32,44 +39,43 @@ const LogIn = async () => {
 <template>
   <div class="d-flex justify-content-center align-items-center vh-100">
     <div>
-      
-      <TextboxComponent :is-password=false label="Login" placeholder="Wpisz login..." @text-changed="e=>login=e"></TextboxComponent>
-      <TextboxComponent :is-password=true label="Hasło" placeholder="Wpisz hasło..." @text-changed="e=>password=e"></TextboxComponent>
-      <p style="text-align: center; margin-top: 10px;" v-if="errorMessage">{{ errorMessage }}</p>
-      <router-link v-else :to="{ name: 'Main' }"></router-link>
-      <div class="button">
-        <button :class=common.buttonType.Accept @click="LogIn">Zaloguj
-          <!--
 
-            <router-link v-if="apiResult === 'success'" :to="{ name: 'Main' }"></router-link>
-            <router-link v-if="apiResult === 'error'" :to="{ name: 'NotFound' }"></router-link>
-          -->
-        </button>
+      <TextboxComponent :is-password=false label="Login" placeholder="Wpisz login..."
+        @text-changed="e => { login = e; checkDisabled() }">
+      </TextboxComponent>
+      <TextboxComponent :is-password=true label="Hasło" placeholder="Wpisz hasło..."
+        @text-changed="e => { password = e; checkDisabled() }">
+      </TextboxComponent>
+      <p style="text-align: center; margin-top: 10px;" v-if="errorMessage">{{ errorMessage }}</p>
+      <div class="button">
+        <button :class=common.buttonType.Accept :disabled=disabled @click="LogIn">Zaloguj</button>
       </div>
       <div class="button">
         <small class="form-text text-muted">Nie posiadasz jeszcze konta?</small>
-        <button :class=common.buttonType.Info><router-link :to="{name: 'CreateUser'}">Załóż konto</router-link></button>
+        <button :class=common.buttonType.Info><router-link :to="{ name: 'CreateUser' }">Załóż konto</router-link></button>
       </div>
-      </div>  
     </div>
+  </div>
 </template>
 
 <style scoped>
 button {
-    margin: 0 auto;
-    display: block;
-    width: 100%;
+  margin: 0 auto;
+  display: block;
+  width: 100%;
 }
-.button
-{
+
+.button {
   margin-top: 2%;
   padding: 10px;
 }
-a { 
+
+a {
   text-decoration: none;
-  color: whitesmoke; 
-  }
-  a:hover{
-    color: white;
-  }
+  color: whitesmoke;
+}
+
+a:hover {
+  color: white;
+}
 </style>
