@@ -30,7 +30,7 @@ export function GetMyActivities(id) {
 export function CreateActivity(name, date, creatorId, city, address) {
     return {
         path: `${baseUrl}activity`,
-        params: { params: {name:name, date:date, creatorId:creatorId, city:city, address:address} }
+        params: {name:name, date:date, creatorId:creatorId, city:city, address:address}
     }
 }
 
@@ -38,7 +38,7 @@ export function CreateActivity(name, date, creatorId, city, address) {
 export function UpdateActivity(id, oldStatusId, newStatusId, oldUserId, newUserId) {
     return {
         path: `${baseUrl}activity/${id}`,
-        params: { params: {oldStatusId:oldStatusId, newStatusId:newStatusId, oldUserId:oldUserId, newUserId:newUserId} }
+        params: {oldStatusId:oldStatusId, newStatusId:newStatusId, oldUserId:oldUserId, newUserId:newUserId}
     }
 }
 
@@ -73,7 +73,7 @@ export function GetUser(id) {
 export function CreateUser(login, password, firstName, lastName, mailAddress, phoneNumber, address, isEmailNotificationsAllowed) {
     return {
         path: `${baseUrl}users`,
-        params: { params: {login:login, password:password, firstName:firstName, lastName:lastName, mailAddress:mailAddress, phoneNumber:phoneNumber, address:address, isEmailNotificationsAllowed:isEmailNotificationsAllowed} }
+        params: { login:login, password:password, firstName:firstName, lastName:lastName, mailAddress:mailAddress, phoneNumber:phoneNumber, address:address, isEmailNotificationsAllowed:isEmailNotificationsAllowed}
     }
 }
 
@@ -81,7 +81,7 @@ export function CreateUser(login, password, firstName, lastName, mailAddress, ph
 export function UpdateUser(id, firstName, lastName, mailAddress, phoneNumber, address, isEmailNotificationsAllowed) {
     return {
         path: `${baseUrl}users/${id}`,
-        params: { params: {firstName:firstName, lastName:lastName, mailAddress:mailAddress, phoneNumber:phoneNumber, address:address, isEmailNotificationsAllowed:isEmailNotificationsAllowed} }
+        params: {firstName:firstName, lastName:lastName, mailAddress:mailAddress, phoneNumber:phoneNumber, address:address, isEmailNotificationsAllowed:isEmailNotificationsAllowed}
     }
 }
 

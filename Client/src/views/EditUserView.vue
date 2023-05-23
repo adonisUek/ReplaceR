@@ -2,11 +2,23 @@
 import { ref, toRaw, onMounted } from 'vue';
 import common from '../common.js'
 import TextboxComponent from '../components/TextboxComponent.vue';
-import { GetUser } from '../api';
+import { GetUser, UpdateUser } from '../api';
 import axios from 'axios';
 let user = ref(null);
+import { useRouter } from 'vue-router';
 common.menuVisible = true;
+const router = useRouter();
 
+const Accept = async () => {
+  try {
+    const updateUser = UpdateUser(user.value.id, user.value.firstName, user.value.lastName, user.value.mailAddress,user.value.phoneNumber,user.value.address,true);
+    const response = await axios.put(updateUser.path, updateUser.params);
+    console.log(response);
+    router.push({ name: 'Main' });
+  } catch (error) {
+    console.error(error);
+  }
+};
 
 onMounted(async () => {
   try {
@@ -21,14 +33,16 @@ onMounted(async () => {
   }
 });
 
+//TODO: CHECKBOX CO DO MAILI
+
 </script>
 
 
 <template>
-  <div class="d-flex justify-content-center align-items-center vh-100">
-    <div>
+  <p>{{user}}</p>
+  <div class="justify-content-center">
+    <div v-if="user!==null && user.firstName !== null">
       <h1>Edycja użytkownika</h1>
-      <p>{{ user }}</p>
       <div class="tb">
         <TextboxComponent v-if="user !== null && user.firstName !== null" label="Imię" :started-value=user.firstName
           :is-password=false @text-changed="e => user.firstName = e"></TextboxComponent>
@@ -49,6 +63,12 @@ onMounted(async () => {
         <TextboxComponent v-if="user !== null && user.address !== null" label="Adres" :started-value=user.address
           :is-password=false @text-changed="e => user.address = e"></TextboxComponent>
       </div>
+      <div class="button">
+        <button :class=common.buttonType.Accept @click="Accept">Zatwierdź</button>
+      </div>
+    </div>
+    <div v-else class="d-flex justify-content-center align-items-center vh-100">
+      <img src='../assets/progressBar.gif'  alt="Ładowanie danych..."/>
     </div>
   </div>
 </template>
@@ -56,6 +76,17 @@ onMounted(async () => {
 <style scoped>
 h1 {
   text-align: center;
+  padding: 3%;
+}
+.button {
+  margin-top: 2%;
+  padding: 10px;
+}
+
+button {
+  margin: 0 auto;
+  display: block;
+  width: 200px;
 }
 
 .tb {

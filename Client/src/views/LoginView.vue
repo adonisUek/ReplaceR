@@ -15,7 +15,6 @@ let password = "";
 const router = useRouter();
 
 function checkDisabled() {
-  console.log(login); console.log(password)
   if (login === "" || password === "")
     disabled.value = true;
   else
@@ -34,8 +33,6 @@ const LogIn = async () => {
     errorMessage.value = error.response.data
   }
 };
-
-//todo: przy wejściu na ekran logowania następuje czyszczenie local storage
 </script>
 
 <template>

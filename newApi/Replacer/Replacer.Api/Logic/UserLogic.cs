@@ -110,16 +110,14 @@ namespace Replacer.Api.Logic
 				User? userToEdit = await _dbContext.Users.FindAsync(id);
 				if (userToEdit == null)
 					return null;
-				if (!string.IsNullOrEmpty(parameters.Password))
-					userToEdit.PasswordHash = BCrypt.Net.BCrypt.HashPassword(parameters.Password);
 				if (!string.IsNullOrEmpty(parameters.FirstName))
 					userToEdit.FirstName = parameters.FirstName;
 				if (!string.IsNullOrEmpty(parameters.LastName))
 					userToEdit.LastName = parameters.LastName;
 				if (!string.IsNullOrEmpty(parameters.Address))
-					userToEdit.LastName = parameters.Address;
+					userToEdit.Address = parameters.Address;
 				if (!string.IsNullOrEmpty(parameters.MailAddress))
-					userToEdit.LastName = parameters.MailAddress;
+					userToEdit.MailAddress = parameters.MailAddress;
 				if (parameters.PhoneNumber != null)
 					userToEdit.PhoneNumber = parameters.PhoneNumber;
 				userToEdit.IsEmailNotificationsAllowed = parameters.IsEmailNotificationsAllowed;
