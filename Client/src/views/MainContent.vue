@@ -8,8 +8,6 @@ import {GetActivities, UpdateActivity} from '../api'
 common.menuVisible = true;
 const activities = ref(null);
 const displayedData = [];
-const userId = 1;
-const isScriptLoaded = ref(false);
 
 function log(activity) {
   console.log(activity);

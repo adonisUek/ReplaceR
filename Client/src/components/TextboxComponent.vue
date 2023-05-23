@@ -4,8 +4,9 @@ const props = defineProps({
   placeholder: String,
   tooltip: String,
   isPassword: Boolean,
+  startedValue: String
 });
-let inputText = "";
+let inputText = props.startedValue ? props.startedValue : "";
 const emit = defineEmits(['textChanged']);
 function onInput(e)
 {
@@ -13,13 +14,13 @@ function onInput(e)
   emit('textChanged', inputText);
 }
 
-const inputType = props.isPassword ? "password" : "email";
+const inputType = props.isPassword ? "password" : "text";
 </script>
 <template>
   <form>
     <div class="form-group" id="textboxDiv">
       <label>{{ label }}</label>
-      <input :type=inputType class="form-control textbox" v-model="inputText" :placeholder=placeholder @input="onInput">
+      <input :type=inputType class="form-control textbox" :value=startedValue v-model="inputText" :placeholder=placeholder @input="onInput">
       <small class="form-text text-muted">{{ tooltip }}</small>
     </div>
   </form>

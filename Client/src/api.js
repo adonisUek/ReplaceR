@@ -78,10 +78,10 @@ export function CreateUser(login, password, firstName, lastName, mailAddress, ph
 }
 
 //put
-export function UpdateUser(id, password, firstName, lastName, mailAddress, phoneNumber, address, isEmailNotificationsAllowed) {
+export function UpdateUser(id, firstName, lastName, mailAddress, phoneNumber, address, isEmailNotificationsAllowed) {
     return {
         path: `${baseUrl}users/${id}`,
-        params: { params: {password:password, firstName:firstName, lastName:lastName, mailAddress:mailAddress, phoneNumber:phoneNumber, address:address, isEmailNotificationsAllowed:isEmailNotificationsAllowed} }
+        params: { params: {firstName:firstName, lastName:lastName, mailAddress:mailAddress, phoneNumber:phoneNumber, address:address, isEmailNotificationsAllowed:isEmailNotificationsAllowed} }
     }
 }
 

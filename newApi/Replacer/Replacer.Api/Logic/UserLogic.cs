@@ -66,7 +66,8 @@ namespace Replacer.Api.Logic
 										   select new UserAuthDto()
 										   {
 											   Login = user.Login,
-											   Password = user.PasswordHash
+											   Password = user.PasswordHash,
+											   Id = user.Id,
 										   }).SingleOrDefaultAsync();
 				return userWithLogin;
 			}

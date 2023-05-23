@@ -7,6 +7,7 @@ import axios from 'axios';
 import { AuthenticateUser } from '../api';
 
 common.menuVisible = false;
+localStorage.clear();
 const errorMessage = ref(null);
 const disabled = ref(true);
 let login = "";
@@ -26,6 +27,7 @@ const LogIn = async () => {
     const auth = AuthenticateUser(login, password);
     const response = await axios.get(auth.path, auth.params);
     console.log(response);
+    localStorage.setItem("user", JSON.stringify(response.data));
     router.push({ name: 'Main' });
   } catch (error) {
     console.error(error);
@@ -39,7 +41,6 @@ const LogIn = async () => {
 <template>
   <div class="d-flex justify-content-center align-items-center vh-100">
     <div>
-
       <TextboxComponent :is-password=false label="Login" placeholder="Wpisz login..."
         @text-changed="e => { login = e; checkDisabled() }">
       </TextboxComponent>
