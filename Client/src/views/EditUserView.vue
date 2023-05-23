@@ -5,13 +5,14 @@ import TextboxComponent from '../components/TextboxComponent.vue';
 import { GetUser, UpdateUser } from '../api';
 import axios from 'axios';
 let user = ref(null);
+const isChecked = ref(false);
 import { useRouter } from 'vue-router';
 common.menuVisible = true;
 const router = useRouter();
 
 const Accept = async () => {
   try {
-    const updateUser = UpdateUser(user.value.id, user.value.firstName, user.value.lastName, user.value.mailAddress,user.value.phoneNumber,user.value.address,true);
+    const updateUser = UpdateUser(user.value.id, user.value.firstName, user.value.lastName, user.value.mailAddress,user.value.phoneNumber,user.value.address,isChecked.value);
     const response = await axios.put(updateUser.path, updateUser.params);
     console.log(response);
     router.push({ name: 'Main' });
@@ -27,19 +28,18 @@ onMounted(async () => {
     const myUserData = GetUser(getUser.id);
     const response = await axios.get(myUserData.path, myUserData.params);
     user.value = response.data;
+    isChecked.value=user.value.isEmailNotificationsAllowed;
     console.log(response)
   } catch (error) {
     console.error(error);
   }
 });
 
-//TODO: CHECKBOX CO DO MAILI
-
 </script>
 
 
 <template>
-  <p>{{user}}</p>
+  <p>{{user}} {{ isChecked }}</p>
   <div class="justify-content-center">
     <div v-if="user!==null && user.firstName !== null">
       <h1>Edycja użytkownika</h1>
@@ -63,6 +63,10 @@ onMounted(async () => {
         <TextboxComponent v-if="user !== null && user.address !== null" label="Adres" :started-value=user.address
           :is-password=false @text-changed="e => user.address = e"></TextboxComponent>
       </div>
+      <div class="cb">
+        <input type="checkbox" name="scales" v-model="isChecked">
+        <label>Zgoda na powiadomienia e-mail od aplikacji</label>
+      </div>
       <div class="button">
         <button :class=common.buttonType.Accept @click="Accept">Zatwierdź</button>
       </div>
@@ -81,6 +85,17 @@ h1 {
 .button {
   margin-top: 2%;
   padding: 10px;
+}
+
+input, label{
+  display: inline-block;
+}
+
+.cb{
+  margin-top:20px;
+  text-align: center;
+  align-items: center;
+  justify-content: center;
 }
 
 button {
