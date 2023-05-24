@@ -3,12 +3,14 @@ import { ref, onMounted, toRefs, computed, toRaw } from 'vue'
 import GridComponent from '../components/GridComponent.vue';
 import common from '../common.js'
 import axios from 'axios';
+import { useRouter } from 'vue-router';
 import { GetActivities, UpdateActivity } from '../api'
 common.menuVisible = true;
 const activities = ref(null);
 let cities = ref([]);
 let selectedCity = ref('');
 const displayedData = [];
+const router=useRouter();
 let filteredDisplayedData = displayedData;
 
 function log(activity) {
@@ -43,6 +45,8 @@ const clearFilters = () => {
 onMounted(async () => {
   try {
     const localStorageData = localStorage.getItem('user');
+    if (localStorageData === null || localStorageData === undefined)
+      router.push({ name: 'LogIn' });
     const availableActivities = GetActivities(JSON.parse(localStorageData).id);
     const response = await axios.get(availableActivities.path, availableActivities.params);
     activities.value = response.data;
@@ -53,8 +57,8 @@ onMounted(async () => {
         id: activity.value.id,
         Nazwa: activity.value.name,
         Data: `${dataAktywności.getDate().toString().padStart(2, '0')}-${(dataAktywności.getMonth() + 1).toString().padStart(2, '0')}-${dataAktywności.getFullYear()}, ${dataAktywności.getHours().toString().padStart(2, '0')}:${dataAktywności.getMinutes().toString().padStart(2, '0')}`,
-        Adres: activity.value.address,
         Miasto: activity.value.city,
+        Adres: activity.value.address,
         Twórca: `${activity.value.creator.firstName} ${activity.value.creator.lastName} (${activity.value.creator.login})`,
       }
       if (!cities.value.some(city => city === activity.value.city))

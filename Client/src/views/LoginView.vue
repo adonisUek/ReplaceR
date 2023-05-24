@@ -27,7 +27,7 @@ const LogIn = async () => {
     const response = await axios.get(auth.path, auth.params);
     console.log(response);
     localStorage.setItem("user", JSON.stringify(response.data));
-    router.push({ name: 'Main' });
+    router.push({ name: 'My' });
   } catch (error) {
     console.error(error);
     errorMessage.value = error.response.data

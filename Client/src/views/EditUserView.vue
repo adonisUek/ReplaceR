@@ -12,7 +12,7 @@ const router = useRouter();
 
 const Accept = async () => {
   try {
-    const updateUser = UpdateUser(user.value.id, user.value.firstName, user.value.lastName, user.value.mailAddress,user.value.phoneNumber,user.value.address,isChecked.value);
+    const updateUser = UpdateUser(user.value.id, user.value.firstName, user.value.lastName, user.value.mailAddress, user.value.phoneNumber, user.value.address, isChecked.value);
     const response = await axios.put(updateUser.path, updateUser.params);
     console.log(response);
     router.push({ name: 'Main' });
@@ -24,11 +24,13 @@ const Accept = async () => {
 onMounted(async () => {
   try {
     const localStorageData = localStorage.getItem('user');
+    if (localStorageData === null || localStorageData === undefined)
+      router.push({ name: 'LogIn' });
     const getUser = JSON.parse(localStorageData);
     const myUserData = GetUser(getUser.id);
     const response = await axios.get(myUserData.path, myUserData.params);
     user.value = response.data;
-    isChecked.value=user.value.isEmailNotificationsAllowed;
+    isChecked.value = user.value.isEmailNotificationsAllowed;
     console.log(response)
   } catch (error) {
     console.error(error);
@@ -39,9 +41,9 @@ onMounted(async () => {
 
 
 <template>
-  <p>{{user}} {{ isChecked }}</p>
+  <p>{{ user }} {{ isChecked }}</p>
   <div class="justify-content-center">
-    <div v-if="user!==null && user.firstName !== null">
+    <div v-if="user !== null && user.firstName !== null">
       <h1>Edycja użytkownika</h1>
       <div class="tb">
         <TextboxComponent v-if="user !== null && user.firstName !== null" label="Imię" :started-value=user.firstName
@@ -72,7 +74,7 @@ onMounted(async () => {
       </div>
     </div>
     <div v-else class="d-flex justify-content-center align-items-center vh-100">
-      <img src='../assets/progressBar.gif'  alt="Ładowanie danych..."/>
+      <img src='../assets/progressBar.gif' alt="Ładowanie danych..." />
     </div>
   </div>
 </template>
@@ -82,17 +84,19 @@ h1 {
   text-align: center;
   padding: 3%;
 }
+
 .button {
   margin-top: 2%;
   padding: 10px;
 }
 
-input, label{
+input,
+label {
   display: inline-block;
 }
 
-.cb{
-  margin-top:20px;
+.cb {
+  margin-top: 20px;
   text-align: center;
   align-items: center;
   justify-content: center;
