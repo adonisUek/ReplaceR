@@ -276,8 +276,7 @@ namespace Replacer.Api.Logic
 			{
 				throw new ApplicationException("Klient SMTP wywołał wyjątek. Sprawdź połączenie z internetem." + ex.Message);
 			}
-
-			throw new NotImplementedException();
+			return activity;
 		}
 	}
 }
