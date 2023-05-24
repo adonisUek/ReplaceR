@@ -41,7 +41,7 @@ const LogIn = async () => {
       <TextboxComponent :is-password=false label="Login" placeholder="Wpisz login..."
         @text-changed="e => { login = e; checkDisabled() }">
       </TextboxComponent>
-      <TextboxComponent :is-password=true label="Hasło" placeholder="Wpisz hasło..." @on-enter=LogIn
+      <TextboxComponent :is-password=true label="Hasło" placeholder="Wpisz hasło..."
         @text-changed="e => { password = e; checkDisabled()}">
       </TextboxComponent>
       <p style="text-align: center; margin-top: 10px;" v-if="errorMessage">{{ errorMessage }}</p>

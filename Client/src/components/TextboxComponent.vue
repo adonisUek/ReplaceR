@@ -5,7 +5,6 @@ const props = defineProps({
   tooltip: String,
   isPassword: Boolean,
   startedValue: String,
-  onEnter: Function
 });
 let inputText = props.startedValue ? props.startedValue : "";
 const emit = defineEmits(['textChanged']);
