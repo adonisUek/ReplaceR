@@ -4,6 +4,7 @@ import common from '../common.js'
 import TextboxComponent from '../components/TextboxComponent.vue';
 import { CreateUser } from '../api';
 import axios from 'axios';
+import { useRouter } from 'vue-router';
 let user = ref(null);
 user.value = {
   login: '',
@@ -15,7 +16,7 @@ user.value = {
   address: '',
   isEmailNotificationsAllowed: false
 };
-import { useRouter } from 'vue-router';
+let title = ref('Utwórz użytkownika');
 common.menuVisible = true;
 const router = useRouter();
 const disabled = ref(true);
@@ -30,21 +31,25 @@ function checkDisabled() {
 
 const Accept = async () => {
   try {
-    const createUser = CreateUser(user.login, user.password, user.firstName, user.lastName, user.mailAddress, user.phoneNumber, user.address, user.isEmailNotificationsAllowed);
+    const createUser = CreateUser(user.value.login, user.value.password, user.value.firstName, user.value.lastName, user.value.mailAddress, user.value.phoneNumber, user.value.address, user.value.isEmailNotificationsAllowed);
     const response = await axios.post(createUser.path, createUser.params);
     console.log(response);
-    //router.push({ name: 'LogIn' });
+    router.push({ name: 'UserAdded' });
   } catch (error) {
+    title.value = "Wystąpił błąd podczas tworzenia użytkownika: " + error.response.data
     console.error(error);
   }
 };
+
+
+
 </script>
 
 
 <template>
   <p>{{ user }}</p>
   <div class="main">
-    <h1>Utwórz użytkownika</h1>
+    <h1>{{ title }}</h1>
     <div class="tb">
       <TextboxComponent label="Login" :started-value=user.login :tooltip="user.login === '' ? 'Zbyt krótki login' : ''"
         :is-password=false @text-changed="e => { user.login = e; checkDisabled() }"></TextboxComponent>

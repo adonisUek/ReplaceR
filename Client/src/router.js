@@ -40,6 +40,11 @@ export default createRouter({
             component: () => import('./views/MyActivitiesView.vue')
         },
         {
+            path: '/added',
+            name: 'UserAdded',
+            component: () => import('./views/UserAdded.vue')
+        },
+        {
             path: "/:pathMatch(.*)*",
             name: 'NotFound',
             component:() => import('./views/NotFound.vue')
