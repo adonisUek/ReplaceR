@@ -66,7 +66,7 @@ onMounted(async () => {
           :is-password=false @text-changed="e => user.address = e"></TextboxComponent>
       </div>
       <div class="cb">
-        <input type="checkbox" name="scales" v-model="isChecked">
+        <input type="checkbox" v-model="isChecked">
         <label>Zgoda na powiadomienia e-mail od aplikacji</label>
       </div>
       <div class="button">
