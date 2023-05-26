@@ -269,8 +269,7 @@ namespace Replacer.Api.Logic
 			};
 			try
 			{
-				foreach (MailAddress address in message.To.ToArray())
-					smtp.SendAsync(message, address);
+					smtp.Send(message);
 			}
 			catch (SmtpException ex)
 			{

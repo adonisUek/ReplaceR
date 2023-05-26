@@ -36,12 +36,9 @@ onMounted(async () => {
     console.error(error);
   }
 });
-
 </script>
 
-
 <template>
-  <p>{{ user }} {{ isChecked }}</p>
   <div class="justify-content-center">
     <div v-if="user !== null && user.firstName !== null">
       <h1>Edycja użytkownika</h1>

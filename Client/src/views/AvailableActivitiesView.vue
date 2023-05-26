@@ -13,7 +13,7 @@ const displayedData = [];
 const router=useRouter();
 let filteredDisplayedData = displayedData;
 
-function log(activity) {
+function Select(activity) {
   console.log(activity);
   console.log(selectedCity.value);
   try {
@@ -23,12 +23,11 @@ function log(activity) {
     const userId = JSON.parse(localStorage.getItem('user')).id;
     const creatorId = act.find(a => a.id === activity.id).creator.id;
     const updateActivity = UpdateActivity(activity.id, 1, 2, creatorId, userId)
-    //axios.put(updateActivity.path, updateActivity.params);
+    axios.put(updateActivity.path, updateActivity.params);
   }
   catch (error) {
     console.error(error);
   }
-  //location.reload();//do przeładowania strony jeszcze raz
 }
 
 const handleOptionChange = () => {
@@ -88,7 +87,7 @@ onMounted(async () => {
   </div>
   <div class="grid">
     <GridComponent v-if="activities !== null" :display-data-source="handleOptionChange()" title="Dostępne zajęcia"
-      button-text="Wybierz" :button-type=common.buttonType.Accept @button-clicked="e => log(e)"></GridComponent>
+      button-text="Wybierz" :button-type=common.buttonType.Accept @button-clicked="e => Select(e)"></GridComponent>
     <div v-else class="d-flex justify-content-center align-items-center vh-100">
       <img src='../assets/progressBar.gif' alt="Ładowanie danych..." />
     </div>
@@ -107,7 +106,6 @@ select {
   justify-content: center;
   align-items: center;
 }
-
 .grid {
   border-top: 1px solid darkgrey;
 

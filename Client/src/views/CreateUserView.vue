@@ -40,14 +40,9 @@ const Accept = async () => {
     console.error(error);
   }
 };
-
-
-
 </script>
 
-
 <template>
-  <p>{{ user }}</p>
   <div class="main">
     <h1>{{ title }}</h1>
     <div class="tb">
@@ -139,4 +134,5 @@ button {
   align-items: center;
   margin-bottom: 10px;
   margin-top: 5px;
-}</style>
+}
+</style>
