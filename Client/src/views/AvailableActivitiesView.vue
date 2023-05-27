@@ -87,7 +87,7 @@ onMounted(async () => {
   </div>
   <div class="grid">
     <GridComponent v-if="activities !== null" :display-data-source="handleOptionChange()" title="Dostępne zajęcia"
-      button-text="Wybierz" :button-type=common.buttonType.Accept @button-clicked="e => Select(e)"></GridComponent>
+      button-text="Zarezerwuj" :button-type=common.buttonType.Accept @button-clicked="e => Select(e)"></GridComponent>
     <div v-else class="d-flex justify-content-center align-items-center vh-100">
       <img src='../assets/progressBar.gif' alt="Ładowanie danych..." />
     </div>

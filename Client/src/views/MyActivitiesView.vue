@@ -9,7 +9,6 @@ common.menuVisible = true;
 const activities = ref(null);
 const notReservedActivitiesCreatedByMe = [];
 const reservedActivitiesCreatedByMe = [];
-const reservedActivitiesByMe = [];
 const router = useRouter();
 const id = ref(null);
 
@@ -25,7 +24,6 @@ onMounted(async () => {
     activities.value = response.data;
     const activitiesCreated = toRaw(activities.value).filter(act => act.creator.id === id.value && act.statusName === "Available");
     const reservedActivities = toRaw(activities.value).filter(act => act.creator.id === id.value && act.statusName === "Reserved");
-    const activitiesReservedByMe = toRaw(activities.value).filter(act => act.newUser && act.newUser.id === id.value && act.statusName === "Reserved");
 
     activitiesCreated.forEach(activity => {
       const dataAktywności = new Date(activity.date);
@@ -49,19 +47,6 @@ onMounted(async () => {
       }
       reservedActivitiesCreatedByMe.push(displayedActivity);
     });
-
-    activitiesReservedByMe.forEach(activity => {
-      const dataAktywności = new Date(activity.date);
-      const displayedActivity = {
-        id: activity.id,
-        Nazwa: activity.name,
-        Data: `${dataAktywności.getDate().toString().padStart(2, '0')}-${(dataAktywności.getMonth() + 1).toString().padStart(2, '0')}-${dataAktywności.getFullYear()}, ${dataAktywności.getHours().toString().padStart(2, '0')}:${dataAktywności.getMinutes().toString().padStart(2, '0')}`,
-        Adres: `${activity.address}, ${activity.city}`,
-        Utworzył: `${activity.creator.firstName} ${activity.creator.lastName} (${activity.creator.login})`,
-      }
-      reservedActivitiesByMe.push(displayedActivity);
-    });
-
   } catch (error) {
     console.error(error);
   }
@@ -70,17 +55,12 @@ onMounted(async () => {
 </script>
 
 <template>
-  <p>{{ activities }}</p>
-  <p>{{ id }}</p>
   <div v-if="activities !== null">
     <GridComponent :display-data-source="notReservedActivitiesCreatedByMe"
-      title="Utworzone przeze mnie i nie zarezerwowane" button-text="Usuń zajęcia" :button-type=common.buttonType.Delete
+      title="Jeszcze nie zarezerwowane" button-text="Usuń zajęcia" :button-type=common.buttonType.Delete
       @button-clicked="e => console.log(e)"></GridComponent>
     <GridComponent v-if="activities !== null" :display-data-source="reservedActivitiesCreatedByMe"
-      title="Utworzone przeze mnie i zarezerwowane" button-text="Odwołaj zajęcia" :button-type=common.buttonType.Warning
-      @button-clicked="e => console.log(e)"></GridComponent>
-    <GridComponent v-if="activities !== null" :display-data-source="reservedActivitiesByMe"
-      title="Zarezerwowane przeze mnie" button-text="Anuluj rezerwację" :button-type=common.buttonType.Warning
+      title="Zarezerwowane" button-text="Odwołaj zajęcia" :button-type=common.buttonType.Warning
       @button-clicked="e => console.log(e)"></GridComponent>
   </div>
   <div v-else class="d-flex justify-content-center align-items-center vh-100">
