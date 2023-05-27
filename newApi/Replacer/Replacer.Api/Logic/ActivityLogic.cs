@@ -4,9 +4,9 @@ using Replacer.Api.Logic.Parameters;
 using Replacer.DbModels;
 using Replacer.DTO;
 using Microsoft.EntityFrameworkCore;
-using System.Net;
-using System.Net.Mail;
-using System.Net.Mime;
+using MimeKit;
+using MailKit.Net.Smtp;
+using MailKit.Security;
 
 namespace Replacer.Api.Logic
 {
@@ -203,7 +203,6 @@ namespace Replacer.Api.Logic
 
 		public async Task<Activity?> UpdateActivity(int id, UpdateActivityParameters parameters)
 		{
-			//TODO
 			Activity? activity = await _dbContext.Activities.FindAsync(id);
 			User? newUser = await _dbContext.Users.FindAsync(parameters.NewUserId);
 			User? oldUser = await _dbContext.Users.FindAsync(parameters.OldUserId);
@@ -214,16 +213,16 @@ namespace Replacer.Api.Logic
 			if (newUser == null)
 				throw new ApplicationException("Nie znaleziono użytkownika (newUserId) o id" + parameters.NewUserId);
 
-			MailMessage message = new()
-			{
-				From = new MailAddress("empatyzacja@gmail.com", "REPLACER APP"),
-				Subject = "Zmiana statusu aktywności w aplikacji Replacer"
-			};
+			var message = new MimeMessage();
+			message.From.Add(new MailboxAddress("Replacer", "uekadonis@gmail.com"));
+			message.Subject = "Zmiana statusu aktywności w aplikacji Replacer";
+
+			var bodyBuilder = new BodyBuilder();
 
 			if ((!string.IsNullOrEmpty(oldUser?.MailAddress)) && oldUser.IsEmailNotificationsAllowed)
-				message.To.Add(new MailAddress(oldUser.MailAddress));
+				message.To.Add(new MailboxAddress("", oldUser.MailAddress));
 			if ((!string.IsNullOrEmpty(newUser?.MailAddress)) && newUser.IsEmailNotificationsAllowed)
-				message.To.Add(new MailAddress(newUser.MailAddress));
+				message.To.Add(new MailboxAddress("", newUser.MailAddress));
 
 			activity.StatusId = parameters.NewStatusId;
 
@@ -231,7 +230,7 @@ namespace Replacer.Api.Logic
 			if (parameters.OldStatusId == 1 && parameters.NewStatusId == 2)
 			{
 				activity.NewUserId = parameters.NewUserId;
-				message.Body = $"Użytkownik {newUser?.FirstName} {newUser?.LastName} ({newUser?.Login}) zarezerwował aktywość: {activity?.Name}, " +
+				bodyBuilder.TextBody = $"Użytkownik {newUser?.FirstName} {newUser?.LastName} ({newUser?.Login}) zarezerwował aktywość: {activity?.Name}, " +
 					$"którą utworzył użytkownik {oldUser?.FirstName} {oldUser?.LastName} ({oldUser?.Login})" +
 					$"Aktywność odbędzie się {activity?.Date} w lokalizacji: {activity?.Address}, {activity?.City}";
 			}
@@ -239,15 +238,17 @@ namespace Replacer.Api.Logic
 			//użytkownik który zarezerwował anuluje rezerwację
 			if (parameters.OldStatusId == 2 && parameters.NewStatusId == 1)
 			{
-				message.Body = $"Użytkownik {newUser?.FirstName} {newUser?.LastName} ({newUser?.Login}) anulował rezerwację aktywości: {activity?.Name}, " +
+				bodyBuilder.TextBody = $"Użytkownik {newUser?.FirstName} {newUser?.LastName} ({newUser?.Login}) anulował rezerwację aktywości: {activity?.Name}, " +
 					$"którą utworzył użytkownik {oldUser?.FirstName} {oldUser?.LastName} ({oldUser?.Login})" +
 					$"Szczegóły aktywności: data: {activity?.Date.ToString()}, lokalizacja: {activity?.Address}, {activity?.City}";
+				if (activity != null)
+					activity.NewUserId = null;
 			}
 
 			//twórca odwołuje już zarezerwowaną aktywność
 			if (parameters.OldStatusId == 2 && parameters.NewStatusId == 3)
 			{
-				message.Body = $"Użytkownik {oldUser?.FirstName} {oldUser?.LastName} ({oldUser?.Login}) odwołał aktywość: {activity?.Name}, " +
+				bodyBuilder.TextBody = $"Użytkownik {oldUser?.FirstName} {oldUser?.LastName} ({oldUser?.Login}) odwołał aktywość: {activity?.Name}, " +
 					$"Szczegóły aktywności: data: {activity?.Date.ToString()}, lokalizacja: {activity?.Address}, {activity?.City}";
 			}
 
@@ -256,24 +257,22 @@ namespace Replacer.Api.Logic
 			{
 				throw new ApplicationException("Do odwoływania nie zarezerwowanych aktywności słuzy metoda delete activity, zaś przywracanie anulowanych aktywności nie jest obsługiwane");
 			}
-
+			message.Body = bodyBuilder.ToMessageBody();
 			await _dbContext.SaveChangesAsync();
 
-			SmtpClient smtp = new()
+			using (var client = new SmtpClient())
 			{
-				Host = "smtp.gmail.com",
-				Port = 587,
-				EnableSsl = true,
-				UseDefaultCredentials = false,
-				Credentials = new NetworkCredential("empatyzacja@gmail.com", "Empatyzacja1!")
-			};
-			try
-			{
-					smtp.Send(message);
-			}
-			catch (SmtpException ex)
-			{
-				throw new ApplicationException("Klient SMTP wywołał wyjątek. Sprawdź połączenie z internetem." + ex.Message);
+				try
+				{
+					client.Connect("smtp.gmail.com", 587, SecureSocketOptions.StartTls);
+					client.Authenticate("uekadonis@gmail.com", "Adonis123!");
+					client.Send(message);
+					client.Disconnect(true);
+				}
+				catch (Exception ex)
+				{
+					throw new ApplicationException(ex.Message);
+				}
 			}
 			return activity;
 		}

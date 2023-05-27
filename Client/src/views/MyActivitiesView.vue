@@ -12,6 +12,33 @@ const reservedActivitiesCreatedByMe = [];
 const router = useRouter();
 const id = ref(null);
 
+function Delete(activity) {
+  try {
+    const deleteActivity = DeleteActivity(activity.id);
+    axios.delete(deleteActivity.path, deleteActivity.params);
+    location.reload();
+  }
+  catch (error) {
+    console.error(error);
+    router.push('NotFound');
+  }
+}
+
+function Cancel(activity) {
+  try {
+    let act = [];
+    act = toRaw(activities.value);
+    const userId = JSON.parse(localStorage.getItem('user')).id;
+    const newUserId = act.find(a => a.id === activity.id).newUser.id;
+    const updateActivity = UpdateActivity(activity.id, 2, 3, userId, newUserId)
+    axios.put(updateActivity.path, updateActivity.params);
+    router.push('AvailableActivities');
+  }
+  catch (error) {
+    console.error(error);
+    router.push('NotFound');
+  }
+}
 
 onMounted(async () => {
   try {
@@ -58,10 +85,10 @@ onMounted(async () => {
   <div v-if="activities !== null">
     <GridComponent :display-data-source="notReservedActivitiesCreatedByMe"
       title="Jeszcze nie zarezerwowane" button-text="Usuń zajęcia" :button-type=common.buttonType.Delete
-      @button-clicked="e => console.log(e)"></GridComponent>
+      @button-clicked="e => Delete(e)"></GridComponent>
     <GridComponent v-if="activities !== null" :display-data-source="reservedActivitiesCreatedByMe"
       title="Zarezerwowane" button-text="Odwołaj zajęcia" :button-type=common.buttonType.Warning
-      @button-clicked="e => console.log(e)"></GridComponent>
+      @button-clicked="e => Cancel(e)"></GridComponent>
   </div>
   <div v-else class="d-flex justify-content-center align-items-center vh-100">
     <img src='../assets/progressBar.gif' alt="Ładowanie danych..." />

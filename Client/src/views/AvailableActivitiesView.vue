@@ -24,9 +24,11 @@ function Select(activity) {
     const creatorId = act.find(a => a.id === activity.id).creator.id;
     const updateActivity = UpdateActivity(activity.id, 1, 2, creatorId, userId)
     axios.put(updateActivity.path, updateActivity.params);
+    router.push('Reserved');
   }
   catch (error) {
     console.error(error);
+    router.push('NotFound');
   }
 }
 

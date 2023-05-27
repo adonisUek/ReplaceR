@@ -11,6 +11,21 @@ const reservedActivitiesByMe = [];
 const router = useRouter();
 const id = ref(null);
 
+function Select(activity) {
+  try {
+    let act = [];
+    act = toRaw(activities.value);
+    const userId = JSON.parse(localStorage.getItem('user')).id;
+    const creatorId = act.find(a => a.id === activity.id).creator.id;
+    const updateActivity = UpdateActivity(activity.id, 2, 1, creatorId, userId)
+    axios.put(updateActivity.path, updateActivity.params);
+    router.push('AvailableActivities');
+  }
+  catch (error) {
+    console.error(error);
+    router.push('NotFound');
+  }
+}
 
 onMounted(async () => {
   try {
@@ -44,7 +59,7 @@ onMounted(async () => {
   <div v-if="activities !== null">
     <GridComponent v-if="activities !== null" :display-data-source="reservedActivitiesByMe"
       title="Zarezerwowane przeze mnie" button-text="Anuluj rezerwację" :button-type=common.buttonType.Warning
-      @button-clicked="e => console.log(e)"></GridComponent>
+      @button-clicked="e => Select(e)"></GridComponent>
   </div>
   <div v-else class="d-flex justify-content-center align-items-center vh-100">
     <img src='../assets/progressBar.gif' alt="Ładowanie danych..." />

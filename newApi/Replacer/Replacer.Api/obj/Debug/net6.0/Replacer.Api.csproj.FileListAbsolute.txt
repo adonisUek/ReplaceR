@@ -88,3 +88,8 @@ D:\ReplaceR\ReplaceR\newApi\Replacer\Replacer.Api\obj\Debug\net6.0\refint\Replac
 D:\ReplaceR\ReplaceR\newApi\Replacer\Replacer.Api\obj\Debug\net6.0\Replacer.Api.pdb
 D:\ReplaceR\ReplaceR\newApi\Replacer\Replacer.Api\obj\Debug\net6.0\Replacer.Api.genruntimeconfig.cache
 D:\ReplaceR\ReplaceR\newApi\Replacer\Replacer.Api\obj\Debug\net6.0\ref\Replacer.Api.dll
+D:\ReplaceR\ReplaceR\newApi\Replacer\Replacer.Api\bin\Debug\net6.0\BouncyCastle.Cryptography.dll
+D:\ReplaceR\ReplaceR\newApi\Replacer\Replacer.Api\bin\Debug\net6.0\MailKit.dll
+D:\ReplaceR\ReplaceR\newApi\Replacer\Replacer.Api\bin\Debug\net6.0\MimeKit.dll
+D:\ReplaceR\ReplaceR\newApi\Replacer\Replacer.Api\bin\Debug\net6.0\System.Security.Cryptography.Pkcs.dll
+D:\ReplaceR\ReplaceR\newApi\Replacer\Replacer.Api\bin\Debug\net6.0\runtimes\win\lib\net6.0\System.Security.Cryptography.Pkcs.dll
