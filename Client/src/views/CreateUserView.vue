@@ -17,7 +17,7 @@ user.value = {
   isEmailNotificationsAllowed: false
 };
 let title = ref('Utwórz użytkownika');
-common.menuVisible = true;
+common.menuVisible = false;
 const router = useRouter();
 const disabled = ref(true);
 
