@@ -9,8 +9,9 @@ common.menuVisible = true;
 const activities = ref(null);
 let cities = ref([]);
 let selectedCity = ref('');
+let selectedDate = ref('');
 const displayedData = [];
-const router=useRouter();
+const router = useRouter();
 let filteredDisplayedData = displayedData;
 
 function Select(activity) {
@@ -35,12 +36,30 @@ function Select(activity) {
 const handleOptionChange = () => {
   if (selectedCity.value !== '')
     filteredDisplayedData = displayedData.filter(data => data.Miasto === selectedCity.value);
+  if (selectedDate.value !== '') {
+    const selectedDateDate = new Date(selectedDate.value);
+    filteredDisplayedData = displayedData.filter(data => {
+      const dateString = data.Data;
+      const dateParts = dateString.split(', ')[0].split('-');
+      const timeParts = dateString.split(', ')[1].split(':');
+      const year = parseInt(dateParts[2]);
+      const month = parseInt(dateParts[1]) - 1; // Pomniejszenie o 1, ponieważ miesiące w JavaScript są indeksowane od 0
+      const day = parseInt(dateParts[0]);
+      const hour = parseInt(timeParts[0]);
+      const minute = parseInt(timeParts[1]);
+      const convertedDate = new Date(year, month, day, hour, minute);
+      return (selectedDateDate.getFullYear() === convertedDate.getFullYear()) &&
+                   (selectedDateDate.getMonth() === convertedDate.getMonth()) &&
+                   (selectedDateDate.getDate() === convertedDate.getDate());
+    });
+  }
   return filteredDisplayedData;
 };
 
 const clearFilters = () => {
   filteredDisplayedData = displayedData;
   selectedCity.value = '';
+  selectedDate.value = '';
 };
 
 onMounted(async () => {
@@ -84,6 +103,10 @@ onMounted(async () => {
       </select>
     </div>
     <div class="item">
+      <label for="dates">Wybierz datę:</label>
+      <input id= "dates" type="date" class="form-control control" v-model="selectedDate" @change="handleOptionChange" />
+    </div>
+    <div class="item">
       <button :class=common.buttonType.Delete @click="clearFilters">Wyczyść filtry</button>
     </div>
   </div>
@@ -97,20 +120,25 @@ onMounted(async () => {
 </template>
 
 <style scoped>
-select {
+select, input {
   width: 50%;
   max-width: 300px;
-  display: inline;
+  display: block;
 }
 
 #filters {
   margin: 35px auto;
   justify-content: center;
   align-items: center;
+  display: inline;
 }
+
 .grid {
   border-top: 1px solid darkgrey;
+}
 
+.control {
+  max-width: 300px;
 }
 
 label {
@@ -118,7 +146,7 @@ label {
 }
 
 .item {
-  padding: 30px;
-  display: inline;
+  padding: 8px;
+  display: block;
 }
 </style>
