@@ -19,11 +19,11 @@ function Select(activity) {
     const creatorId = act.find(a => a.id === activity.id).creator.id;
     const updateActivity = UpdateActivity(activity.id, 2, 1, creatorId, userId)
     axios.put(updateActivity.path, updateActivity.params);
-    router.push('AvailableActivities');
+    router.push({name:'AvailableActivities'});
   }
   catch (error) {
     console.error(error);
-    router.push('NotFound');
+    router.push({name:'NotFound'});
   }
 }
 
@@ -50,6 +50,7 @@ onMounted(async () => {
     });
   } catch (error) {
     console.error(error);
+    router.push({name:'NotFound'});
   }
 });
 

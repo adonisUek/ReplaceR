@@ -50,6 +50,11 @@ export default createRouter({
             component: () => import('./views/UserAdded.vue')
         },
         {
+            path: '/success',
+            name: 'Success',
+            component: () => import('./views/Success.vue')
+        },
+        {
             path: "/:pathMatch(.*)*",
             name: 'NotFound',
             component:() => import('./views/NotFound.vue')

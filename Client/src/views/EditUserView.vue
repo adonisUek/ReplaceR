@@ -15,9 +15,10 @@ const Accept = async () => {
     const updateUser = UpdateUser(user.value.id, user.value.firstName, user.value.lastName, user.value.mailAddress, user.value.phoneNumber, user.value.address, isChecked.value);
     const response = await axios.put(updateUser.path, updateUser.params);
     console.log(response);
-    router.push({ name: 'Main' });
+    router.push({ name: 'Success' });
   } catch (error) {
     console.error(error);
+    router.push({ name: 'NotFound' });
   }
 };
 
@@ -34,6 +35,7 @@ onMounted(async () => {
     console.log(response)
   } catch (error) {
     console.error(error);
+    router.push({ name: 'NotFound' });
   }
 });
 </script>
