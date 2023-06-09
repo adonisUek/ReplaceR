@@ -25,18 +25,18 @@ function Select(activity) {
     const creatorId = act.find(a => a.id === activity.id).creator.id;
     const updateActivity = UpdateActivity(activity.id, 1, 2, creatorId, userId)
     axios.put(updateActivity.path, updateActivity.params);
-    router.push({name:'Reserved'});
+    router.push({ name: 'Reserved' });
   }
   catch (error) {
     console.error(error);
-    router.push({name:'NotFound'});
+    router.push({ name: 'NotFound' });
   }
 }
 
 const handleOptionChange = () => {
-  if (selectedCity.value !== '')
+  if (selectedCity.value !== '' && selectedDate.value === '')
     filteredDisplayedData = displayedData.filter(data => data.Miasto === selectedCity.value);
-  if (selectedDate.value !== '') {
+  else if (selectedDate.value !== '' && selectedCity.value === '') {
     const selectedDateDate = new Date(selectedDate.value);
     filteredDisplayedData = displayedData.filter(data => {
       const dateString = data.Data;
@@ -49,8 +49,26 @@ const handleOptionChange = () => {
       const minute = parseInt(timeParts[1]);
       const convertedDate = new Date(year, month, day, hour, minute);
       return (selectedDateDate.getFullYear() === convertedDate.getFullYear()) &&
-                   (selectedDateDate.getMonth() === convertedDate.getMonth()) &&
-                   (selectedDateDate.getDate() === convertedDate.getDate());
+        (selectedDateDate.getMonth() === convertedDate.getMonth()) &&
+        (selectedDateDate.getDate() === convertedDate.getDate());
+    });
+  }
+  else if (selectedDate.value !== '' && selectedCity.value !== '') {
+    filteredDisplayedData = displayedData.filter(data => data.Miasto === selectedCity.value);
+    const selectedDateDate = new Date(selectedDate.value);
+    filteredDisplayedData = filteredDisplayedData.filter(data => {
+      const dateString = data.Data;
+      const dateParts = dateString.split(', ')[0].split('-');
+      const timeParts = dateString.split(', ')[1].split(':');
+      const year = parseInt(dateParts[2]);
+      const month = parseInt(dateParts[1]) - 1; // Pomniejszenie o 1, ponieważ miesiące w JavaScript są indeksowane od 0
+      const day = parseInt(dateParts[0]);
+      const hour = parseInt(timeParts[0]);
+      const minute = parseInt(timeParts[1]);
+      const convertedDate = new Date(year, month, day, hour, minute);
+      return (selectedDateDate.getFullYear() === convertedDate.getFullYear()) &&
+        (selectedDateDate.getMonth() === convertedDate.getMonth()) &&
+        (selectedDateDate.getDate() === convertedDate.getDate());
     });
   }
   return filteredDisplayedData;
@@ -87,7 +105,7 @@ onMounted(async () => {
     });
   } catch (error) {
     console.error(error);
-    router.push({name: 'NotFound' });
+    router.push({ name: 'NotFound' });
   }
 });
 </script>
@@ -105,7 +123,7 @@ onMounted(async () => {
     </div>
     <div class="item">
       <label for="dates">Wybierz datę:</label>
-      <input id= "dates" type="date" class="form-control control" v-model="selectedDate" @change="handleOptionChange" />
+      <input id="dates" type="date" class="form-control control" v-model="selectedDate" @change="handleOptionChange" />
     </div>
     <div class="item">
       <button :class=common.buttonType.Delete @click="clearFilters">Wyczyść filtry</button>
@@ -121,7 +139,8 @@ onMounted(async () => {
 </template>
 
 <style scoped>
-select, input {
+select,
+input {
   width: 50%;
   max-width: 300px;
   display: block;
