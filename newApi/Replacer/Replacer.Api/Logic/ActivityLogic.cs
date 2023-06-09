@@ -260,6 +260,8 @@ namespace Replacer.Api.Logic
 			message.Body = bodyBuilder.ToMessageBody();
 			await _dbContext.SaveChangesAsync();
 
+			//TODO: WYSYŁANIE MAILI NIE DZIAŁA
+			/*
 			using (var client = new SmtpClient())
 			{
 				try
@@ -274,6 +276,7 @@ namespace Replacer.Api.Logic
 					throw new ApplicationException(ex.Message);
 				}
 			}
+			*/
 			return activity;
 		}
 	}
