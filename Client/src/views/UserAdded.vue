@@ -1,6 +1,6 @@
 <script setup>
 import common from '../common.js'
-common.menuVisible = true;
+common.menuVisible = false;
 </script>
 
 <template>
