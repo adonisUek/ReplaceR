@@ -1,6 +1,6 @@
 <script setup>
 import common from '../common.js'
-common.menuVisible = true;
+common.menuVisible = localStorage.getItem('user') !== null;
 </script>
 
 <template>
